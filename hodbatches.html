@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batches Page</title>
+    <link rel="stylesheet" href="batches.css"> <!-- Link to the same CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <img src="logo2.jpeg" alt="Logo" class="logo" height="65">
+        <div class="header-text">
+            <h1>Welcome, <span id="hod-name">[HOD Name]</span></h1>
+            <h2 class="department-name">DEPARTMENT OF COMPUTER SCIENCE</h2>
+        </div>
+        <nav>
+            <div class="logout">
+                <i class="fas fa-power-off"></i>
+                <p>Logout</p>
+            </div>
+        </nav>
+    </header>
+
+    <aside id="sidebar">
+        <ul>
+            <li><a href="hod.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="batches.html"><i class="fas fa-book"></i> Batches</a></li>
+            <li><a href="setth.html"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
+            <li><a href="mapad.html"><i class="fas fa-chalkboard-teacher"></i> Map Advisor</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <!-- CO Attainment Section -->
+        <section class="attainment-section">
+            <h2 class="section-heading">CO ATTAINMENT</h2>
+            <div class="dropdown-container">
+                <select id="batch">
+                    <option value="">Select Batch</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
+                <select id="semester">
+                    <option value="">Select Semester</option>
+                    <option value="S1">S1</option>
+                    <option value="S2">S2</option>
+                    <option value="S3">S3</option>
+                </select>
+                <select id="course">
+                    <option value="">Select Course</option>
+                    <option value="CS101">CS101</option>
+                    <option value="CS102">CS102</option>
+                    <option value="CS103">CS103</option>
+                </select>
+            </div>
+    
+            <button class="next-button" onclick="validateCO()">Next</button>
+        </section>
+
+        <!-- PO Attainment Section -->
+        <section class="attainment-section">
+            <h2 class="section-heading">PO ATTAINMENT</h2>
+            <div class="dropdown-container">
+                <select id="poBatch">
+                    <option value="">Select Batch</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
+            </div>
+            <button class="next-button" onclick="validatePO()">Next</button>
+        </section>
+    </main>
+
+    <script>
+        function validateCO() {
+            var batch = document.getElementById("batch").value;
+            var semester = document.getElementById("semester").value;
+            var course = document.getElementById("course").value;
+            
+            if (batch === "" || semester === "" || course === "") {
+                alert("Please select valid data for Batch, Semester, and Course.");
+            } else {
+                window.location.href = "batchesco.html";
+            }
+        }
+
+        function validatePO() {
+            var poBatch = document.getElementById("poBatch").value;
+            
+            if (poBatch === "") {
+                alert("Please select a valid Batch.");
+            } else {
+                alert("Proceeding to PO Attainment (Add appropriate navigation link here).")
+            }
+        }
+    </script>
+</body>
+</html>
