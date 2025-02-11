@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses Mapping</title>
+    <link rel="stylesheet" href="advisor.css">
+    <link rel="stylesheet" href="course-mapping.css">
+    <script src="course-mapping.js" defer></script> <!-- External JavaScript -->
+    <style>
+      
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Courses Mapping</h1>
+        <a href="advisor1.html">Back to Dashboard</a>
+    </header>
+    <main>
+        <section class="course-mapping">
+            <h2>Map Subjects to Teachers</h2>
+            <form id="course-form">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject (S6)</th>
+                            <th>Teacher's Name</th>
+                            <th>Department</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select id="subject" name="subject">
+                                    <option value="">Select Subject</option>
+                                    <option value="Data Science">Data Science</option>
+                                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                                    <option value="Cyber Security">Cyber Security</option>
+                                    <option value="Cloud Computing">Cloud Computing</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="teacher" name="teacher">
+                                    <option value="">Select Teacher</option>
+                                    <option value="Dr. Rajesh Kumar">Dr. Rajesh Kumar</option>
+                                    <option value="Prof. Anjali Sharma">Prof. Anjali Sharma</option>
+                                    <option value="Dr. Ravi Menon">Dr. Ravi Menon</option>
+                                    <option value="Ms. Pooja Nair">Ms. Pooja Nair</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="department" name="department">
+                                    <option value="">Select Department</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="submit" class="confirm-btn">Save</button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
