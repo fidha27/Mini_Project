@@ -1,0 +1,254 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styles */
+header {
+    background-color: #1e588c;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px; /* Space between HOD name and department name */
+}
+
+header h1 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.department-name {
+    font-size: 16px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* Logout Icon */
+.logout {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logout i {
+    font-size: 20px;
+}
+
+.logout p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Sidebar Styles */
+#sidebar {
+    background-color: #fff;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 80px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 60px; /* Adjusted to account for the fixed header */
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    margin: 15px 0;
+}
+
+#sidebar ul li a {
+    color: #1e588c;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#sidebar ul li a:hover {
+    background-color: #1e588c;
+    color: #fff;
+}
+
+/* Main Content Styles */
+main {
+    margin-left: 250px;
+    padding: 20px;
+    margin-top: 80px; /* Adjusted to account for the fixed header */
+}
+
+/* Set Threshold Section Styles */
+.threshold-section {
+    background-color: #fff; /* White background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Space between sections */
+}
+
+.threshold-section h2 {
+    background-color: #1e588c; /* Blue background for heading */
+    color: #fff; /* White font */
+    font-size: 20px;
+    margin: -20px -20px 20px -20px; /* Extend heading background to full width */
+    padding: 15px 20px; /* Add padding to heading */
+    border-radius: 10px 10px 0 0; /* Rounded corners at the top */
+    text-transform: uppercase;
+}
+
+.threshold-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between button and dropdown */
+}
+
+.threshold-button {
+    background-color: #1e588c; /* Blue background */
+    color: #fff; /* White font */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.threshold-button:hover {
+    background-color: #154267; /* Darker blue on hover */
+}
+
+.threshold-dropdown {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd; /* Light border */
+    font-size: 14px;
+    background-color: #f4f4f9; /* Grey background */
+    color: #333;
+    flex: 1;
+    transition: border-color 0.3s;
+}
+
+.threshold-dropdown:focus {
+    border-color: #1e588c; /* Blue border on focus */
+}
+
+/* Style for the datalist input */
+input[type="number"].threshold-dropdown {
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding-top: 20px;
+        margin-top: 0;
+    }
+
+    main {
+        margin-left: 0;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .threshold-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .threshold-button {
+        width: 100%;
+    }
+
+    .threshold-dropdown {
+        width: 100%;
+    }
+}
+/* Threshold Display Section */
+.threshold-display {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
+}
+
+.threshold-box {
+    background-color: #f4f4f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.edit-button {
+    background-color: #1e588c;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+}
+
+.edit-button:hover {
+    background-color: #154267;
+}
