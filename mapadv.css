@@ -1,0 +1,145 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  background-color: #1e588c;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+header h1 {
+  font-size: 22px;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+}
+
+/* Sidebar */
+#sidebar {
+  background-color: #fff;
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 120px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+#sidebar ul li a {
+  color: #1e588c;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  padding: 10px 20px;
+  transition: 0.3s;
+}
+
+#sidebar ul li a:hover {
+  background-color: #1e588c;
+  color: #fff;
+}
+
+/* Main Content */
+main {
+  margin-left: 250px;
+  padding: 20px;
+  margin-top: 80px;
+}
+
+.advisor-mapping {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.advisor-mapping h1 {
+  color: #1e588c;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+table th, table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #1e588c;
+  color: #fff;
+}
+
+/* Buttons */
+.edit-btn, .save-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.edit-btn:hover, .save-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Hide elements */
+.hidden {
+  display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+  }
+
+  main {
+      margin-left: 0;
+      width: 100%;
+      padding: 10px;
+  }
+}
