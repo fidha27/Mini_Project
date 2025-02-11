@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threshold Values</title>
+    <link rel="stylesheet" href="setth.css"> <!-- Using the same CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <img src="logo2.jpeg" alt="Logo" class="logo" height="65">
+        <div class="header-text">
+            <h1>Welcome, <span id="hod-name">[HOD Name]</span></h1>
+            <h2 class="department-name">DEPARTMENT OF COMPUTER SCIENCE</h2>
+        </div>
+        <nav>
+            <div class="logout">
+                <i class="fas fa-power-off"></i>
+                <p>Logout</p>
+            </div>
+        </nav>
+    </header>
+
+    <aside id="sidebar">
+        <ul>
+            <li><a href="hod.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="batches.html"><i class="fas fa-book"></i> Batches</a></li>
+            <li><a href="setth.html"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
+            <li><a href="mapad.html"><i class="fas fa-chalkboard-teacher"></i> Map Advisor</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <section class="threshold-display">
+            <h2 class="section-heading">CURRENT THRESHOLD VALUES</h2>
+            <div class="threshold-box">
+                <p><strong>Internal Evaluation Threshold:</strong> <span id="internal-threshold">70%</span></p>
+                <p><strong>External Evaluation Threshold:</strong> <span id="external-threshold">50%</span></p>
+            </div>
+            <button class="edit-button" onclick="editThreshold()">Edit</button>
+        </section>
+    </main>
+
+        <script>
+        function editThreshold() {
+            window.location.href = "setth2.html"; // Redirect to threshold editing page
+        }
+    </script>
+</body>
+</html>
