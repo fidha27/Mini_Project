@@ -1,0 +1,221 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header Styles */
+header {
+  background-color: #1e588c;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+header h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+/* Notification Icon */
+.notification {
+  position: relative;
+  cursor: pointer;
+}
+
+.notification i {
+  font-size: 20px;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: 200px;
+  display: none;
+}
+
+.notification:hover .notification-dropdown {
+  display: block;
+}
+
+.notification-dropdown p {
+  color: #333;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Sidebar Styles */
+#sidebar {
+  background-color: #fff;
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 80px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  margin-top: 60px; /* Adjusted to account for the fixed header */
+  z-index:999;
+}
+
+#sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+#sidebar ul li {
+  margin: 15px 0;
+}
+
+#sidebar ul li a {
+  color: #1e588c;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+#sidebar ul li a:hover {
+  background-color: #1e588c;
+  color: #fff;
+}
+
+/* Main Content Styles */
+main {
+  margin-left: 250px;
+  padding: 20px;
+  margin-top: 80px; /* Adjusted to account for the fixed header */
+  width: calc(100% - 250px); /* Take remaining space */
+  overflow-x: auto;
+  z-index: 1; /* Ensure main content is above sidebar */
+}
+
+.advisor-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.advisor-card h2 {
+  font-size: 24px;
+  color: #1e588c;
+}
+
+/* Student Details Table Styles */
+.student-details {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.student-details h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #1e588c;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-left: 260px;
+  margin-right: 200px;
+}
+
+table th,
+table td {
+  padding: 12px 15px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+table th {
+  background-color: #1e588c;
+  color: #fff;
+  font-weight: 600;
+}
+
+table tr {
+  border-bottom: 1px solid #ddd;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tr:hover {
+  background-color: #f1f1f1;
+}
+
+table tr:last-child {
+  border-bottom: none;
+}
+
+
+  /* Responsive Design */
+@media (max-width: 768px) {
+  #sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding-top: 20px;
+    margin-top: 0;
+  }
+
+  main {
+    margin-left: 0;
+    width: 100%;
+  
+  }
+}
