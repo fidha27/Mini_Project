@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Advisor</title>
+    <link rel="stylesheet" href="mapad.css">
+    <script src="mapad.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <img src="logo2.jpeg" alt="Logo" class="logo" height="65">
+        <div class="header-text">
+            <h1>Welcome, <span id="hod-name">[HOD Name]</span></h1>
+            <h2 class="department-name">DEPARTMENT NAME</h2>
+        </div>
+        <nav>
+            <div class="logout">
+                <i class="fas fa-power-off"></i>
+                <p>Logout</p>
+            </div>
+        </nav>
+    </header>
+
+    <aside id="sidebar">
+        <ul>
+            <li><a href="hod.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="batches.html"><i class="fas fa-book"></i> Batches</a></li>
+            <li><a href="setth.html"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
+            <li><a href="mapad.html"><i class="fas fa-user-cog"></i> Map Advisor</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <section class="advisor-mapping">
+            <h1>Map Advisor</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Batch Name</th>
+                        <th>Name of Advisors</th>
+                        <th>Semester</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="advisor-table">
+                    <tr>
+                        <td>CS 2022-2026</td>
+                        <td><span class="advisor-name">Anu Bonia</span>
+                            <select class="advisor-select hidden">
+                                <option value="Anu Bonia">Anu Bonia</option>
+                                <option value="Alfred Thomas">Alfred Thomas</option>
+                                <option value="New Advisor">New Advisor</option>
+                            </select>
+                        </td>
+                        <td>S6</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="save-btn hidden">Save</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CS 2023-2027</td>
+                        <td><span class="advisor-name">Praveen Pillai</span>
+                            <select class="advisor-select hidden">
+                                <option value="Praveen Pillai">Praveen Pillai</option>
+                                <option value="Another Advisor">Another Advisor</option>
+                            </select>
+                        </td>
+                        <td>S4</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="save-btn hidden">Save</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
