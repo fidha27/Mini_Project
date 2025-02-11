@@ -1,0 +1,75 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Remove scroll */
+}
+header {
+  position: fixed; /* Fix the header */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensure it stays on top */
+}
+header h1 {
+  margin: 0;
+  font-size: 24px; /* Adjust header font size */
+}
+header a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px; /* Adjust link font size */
+}
+header a:hover{
+  text-decoration:underline ;
+  color: #007BFF;
+}
+h2{
+  color: #07315f;
+}
+.course-mapping {
+  position: fixed; /* Fix the table section */
+  top: 80px; /* Adjust based on header height */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 80px); /* Adjust height */
+  overflow-y: auto; /* Scrollable within the container */
+  padding: 10px; /* Reduce padding */
+  background-color: #f9f9f9;
+}
+table {
+  width: 80%; /* Reduce table width */
+  margin: 0 auto; /* Center the table */
+  border-collapse: collapse;
+  font-size: 14px; /* Reduce font size */
+  margin-top: 50px;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px; /* Reduce padding */
+  text-align: left;
+}
+th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+tr:hover {
+  background-color: #f1f1f1;
+}
+.confirm-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 10px; /* Reduce button padding */
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px; /* Reduce button font size */
+}
+.confirm-btn:hover {
+  background-color: #45a049;
+}
