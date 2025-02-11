@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Threshold</title>
+    <link rel="stylesheet" href="setth2.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <img src="logo2.jpeg" alt="Logo" class="logo" height="65">
+        <div class="header-text">
+            <h1>Welcome, <span id="hod-name">[HOD Name]</span></h1>
+            <h2 class="department-name">DEPARTMENT OF COMPUTER SCIENCE</h2>
+        </div>
+        <nav>
+            <div class="logout">
+                <i class="fas fa-power-off"></i>
+                <p>Logout</p>
+            </div>
+        </nav>
+    </header>
+
+    <aside id="sidebar">
+        <ul>
+            <li><a href="hod.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="batches.html"><i class="fas fa-book"></i> Batches</a></li>
+            <li><a href="setth.html"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
+            <li><a href="mapad.html"><i class="fas fa-chalkboard-teacher"></i> Map Advisor</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <!-- Set Internal Evaluation Threshold Section -->
+        <section class="threshold-section">
+            <h2 class="section-heading">SET INTERNAL EVALUATION THRESHOLD</h2>
+            <div class="threshold-container">
+                <button class="threshold-button">Set Internal Threshold</button>
+                <input type="number" id="internal-threshold" class="threshold-dropdown" list="internal-percentages" min="0" max="100" step="1" placeholder="Select or type percentage">
+                <datalist id="internal-percentages">
+                    <script>
+                        for (let i = 0; i <= 100; i++) {
+                            document.write(`<option value="${i}">${i}%</option>`);
+                        }
+                    </script>
+                </datalist>
+            </div>
+        </section>
+
+        <!-- Set External Evaluation Threshold Section -->
+        <section class="threshold-section">
+            <h2 class="section-heading">SET EXTERNAL EVALUATION THRESHOLD</h2>
+            <div class="threshold-container">
+                <button class="threshold-button">Set External Threshold</button>
+                <input type="number" id="external-threshold" class="threshold-dropdown" list="external-percentages" min="0" max="100" step="1" placeholder="Select or type percentage">
+                <datalist id="external-percentages">
+                    <script>
+                        for (let i = 0; i <= 100; i++) {
+                            document.write(`<option value="${i}">${i}%</option>`);
+                        }
+                    </script>
+                </datalist>
+            </div>
+        </section>
+
+        <!-- Save Button -->
+        <div class="save-container">
+            <button class="save-button" onclick="saveThreshold()">Save</button>
+        </div>
+
+        <!-- Popup Message -->
+        <div id="popup" class="popup" style="display: none;">
+            <div class="popup-content">
+                <p id="popup-message">Saved successfully!</p>
+                <button onclick="closePopup()">OK</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function saveThreshold() {
+            var internalThreshold = parseInt(document.getElementById("internal-threshold").value) || 0;
+            var externalThreshold = parseInt(document.getElementById("external-threshold").value) || 0;
+            var popupMessage = document.getElementById("popup-message");
+
+            if (internalThreshold + externalThreshold !== 100) {
+                popupMessage.textContent = "The sum of Internal and External Evaluation Threshold must be exactly 100.";
+                document.getElementById("popup").style.display = "flex";
+                return;
+            }
+
+            // Store values in localStorage
+            localStorage.setItem("internalThreshold", internalThreshold);
+            localStorage.setItem("externalThreshold", externalThreshold);
+
+            // Show success popup
+            popupMessage.textContent = "Saved successfully!";
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
