@@ -1,0 +1,55 @@
+.accept-btn{
+  background-color: #28a750;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 20px;
+}
+.accept-btn:hover{
+  background-color:green
+}
+
+.reject-btn{
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.reject-btn:hover{
+  background-color: rgb(149, 35, 35);
+}
+
+.approve-btn{
+background-color: #28a750;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.approve-btn:hover{
+  background-color:green
+}
+
+#sidebar {
+  width: 250px; /* Set a fixed width */
+  position: fixed;
+  height: 100%;
+  background-color: #f8f9fa;
+}
+
+main, .co-requests, .co-weight-approval {
+  margin-left: 260px; /* Adjust based on sidebar width */
+  padding: 20px;
+}
