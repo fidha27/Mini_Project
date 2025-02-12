@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module Coordinator Dashboard</title>
+    <link rel="stylesheet" href="advisor.css">
+    <link rel="stylesheet" href="mc.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="mc.js" defer></script>
+</head>
+<body>
+    <header>
+        <img src="logo1.png" alt="Logo" class="logo" height="65">
+        <h1>Welcome, <span id="mc-name">[Module Coordinator]</span></h1>
+        <nav>
+            <div class="notification">
+                <i class="fas fa-bell"></i>
+                <div class="notification-dropdown">
+                    <p>No new notifications</p>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <aside id="sidebar">
+        <ul>
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="co-mapping.html"><i class="fas fa-map"></i> Generate CO Mapping</a></li>
+            <li><a href="#"><i class="fas fa-envelope"></i> CO Requests</a></li>
+            <li><a href="#"><i class="fas fa-check-circle"></i> Approve CO Weight</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <section class="mc-card">
+            <div class="mc-info">
+                <h2>Module Coordinator [Name]</h2>
+            </div>
+        </section> 
+    </main>
+
+    <section class="co-requests">
+        <h1>CO Requests from Faculty</h1>
+        <table role="grid">
+            <thead>
+                <tr>
+                    <th>Faculty Name</th>
+                    <th>Course</th>
+                    <th>Requested CO</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dr. Smith</td>
+                    <td>Data Structures</td>
+                    <td>CO1 - Understanding Algorithms</td>
+                    <td>
+                        <button class="accept-btn">Accept</button>
+                        <button class="reject-btn">Reject</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Prof. Johnson</td>
+                    <td>Database Systems</td>
+                    <td>CO2 - Normalization Techniques</td>
+                    <td>
+                        <button class="accept-btn">Accept</button>
+                        <button class="reject-btn">Reject</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="co-weight-approval">
+        <h1>CO Weight Addition & Approval</h1>
+        <table role="grid">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>CO</th>
+                    <th>Weight (%)</th>
+                    <th>Approve</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Data Structures</td>
+                    <td>CO1</td>
+                    <td><input type="number" min="0" max="100" value="20"></td>
+                    <td><button class="approve-btn">Approve</button></td>
+                </tr>
+                <tr>
+                    <td>Database Systems</td>
+                    <td>CO2</td>
+                    <td><input type="number" min="0" max="100" value="25"></td>
+                    <td><button class="approve-btn">Approve</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>
