@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin3.css') }}">
+</head>
+<body>
+    <div class="student-container">
+        <div class="top-bar">
+            <div class="college-info">
+                <h1>{{ college_name }}</h1>
+                <p>{{ university_name }}</p>
+            </div>
+            <div class="top-bar-buttons">
+                <a href="{{ url_for('logout') }}" class="login-btn">Logout</a>
+                <a href="{{ url_for('edit_profile') }}" class="profile-btn">Edit Profile</a>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="add-student-section">
+                <h2>Add Student Details</h2>
+
+                <div class="manual-input">
+                    <h3>Manual Input</h3>
+                    <form id="addStudentForm" method="POST">
+                        <div class="input-group">
+                            <label for="univ_no">University Number</label>
+                            <input type="text" id="univ_no" name="univ_no" placeholder="University Number" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="name">Student Name</label>
+                            <input type="text" id="name" name="name" placeholder="Student Name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="reg_no">Registration Number</label>
+                            <input type="text" id="reg_no" name="reg_no" placeholder="Registration Number" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="dept_code">Department Code</label>
+                            <input type="text" id="dept_code" name="dept_code" placeholder="Department Code" required>
+                        </div>                        
+                        <div class="input-group">
+                            <label for="batch">Batch</label>
+                            <input type="text" id="batch" name="batch" placeholder="Batch" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Add Student</button>
+                    </form>
+                </div>
+                <div class="csv-upload">
+                    <h3>CSV Upload</h3>
+                    <form id="csv-upload-form" method="POST" enctype="multipart/form-data">
+                        <div class="input-group">
+                            <label for="csv-file">Upload CSV File</label>
+                            <input type="file" name="csv-file" id="csv-file" accept=".csv" required>
+                        </div>
+                        <button type="submit" class="upload-btn">Upload</button>
+                        <button class="download-template-btn" onclick="downloadTemplate()">Download CSV Template</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="search-section">
+                <h2>Search Students</h2>
+                    <div class="search-filters">
+                        <input type="text" name="batch" placeholder="Search by Batch">
+                        <input type="text" name="dept_code" placeholder="Search by Department Code">
+                        <input type="text" name="clg_id" placeholder="Search by College ID">
+                        <button class="search-btn" onclick="searchStudents()">Search</button>
+                    </div>
+                    <div id="student-results"></div>
+
+            </div>
+
+            <div class="student-table-section">
+                <h2>Student Details</h2>
+                <table id="student-table">
+                    <thead>
+                        <tr>
+                            <th>University No</th>
+                            <th>Name</th>
+                            <th>Registration No</th>
+                            <th>Batch</th>
+                            <th>Department code</th>
+                            <th>university code</th>
+                            <th>college id</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        <tr  id="student-{{ student._id }}">
+                            <td>{{ student.univ_no }}</td>
+                            <td>{{ student.name }}</td>
+                            <td>{{ student.reg_no }}</td>
+                            <td>{{ student.dept_code }}</td>
+                            <td>{{ student.batch }}</td>
+                            <td>{{ student.univ_code }}</td>
+                            <td>{{ student.clg_id }}</td>
+                            <td>
+                                <button class="edit-btn" onclick="editstudent('{{ student._id }}')">Edit</button>
+                                <button class="delete-btn" onclick="deletestudent('{{ student._id }}')">Delete</button>
+                                <div id="message"></div>
+                            </td>
+                        {% endfor %}
+                    </tbody>
+                    <div id="editModal" style="display:none;">
+                        <div class="modal-content">
+                            <h3>Edit Student Details</h3>
+                            <form id="editStudentForm">
+                                <label>Student Name:</label><input type="text" id="edit_name" required><br>
+                                <label>Registration Number:</label><input type="text" id="edit_reg_no" required><br>
+                                <label>Batch:</label><input type="text" id="edit_batch" required><br>
+                                <label>university no:</label><input type="text" id="edit_univ_no" required><br>
+                                <label>department code:</label><input type="text" id="edit_dept_code" required><br>
+                                <button type="submit">Save Changes</button>
+                                <button type="button" onclick="closeEditModal()">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </table>
+                <button class="export-btn" onclick="exportStudents()">Export to CSV</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='admin3.js') }}"></script>
+</body>
+</html>
