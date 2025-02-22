@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_login.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="left-panel">
+            <h2>LOGIN</h2>
+        </div>
+        <div class="right-panel">
+            <div id="logo">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            </div>
+            <h1>LOGIN</h1>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Username (ADMIN_ID)" required>
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            
+            <button class="login-btn" onclick="login()">LOGIN</button>
+            
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+    
+            if (!username || !password) {
+                alert("Please fill in the required fields.");
+                return;
+            }
+    
+            // Create a FormData object
+            const formData = new FormData();
+            formData.append('username', username);
+            formData.append('password', password);
+    
+            // Send the form data using fetch
+            fetch('/admin_login', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url; // Redirect to the dashboard
+                } else {
+                    alert("Invalid credentials!");
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+    
+</body>
+</html>

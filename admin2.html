@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Faculty Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin2.css') }}">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="faculty-container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="college-info">
+                <h1>{{college_name}}</h1>
+                <p>{{university_name}}</p>
+            </div>
+            <div class="top-bar-buttons">
+                <a href="{{ url_for('logout') }}" class="login-btn">Logout</a>
+                <a href="{{ url_for('edit_profile') }}" class="profile-btn">Edit Profile</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Add Faculty Section -->
+            <div class="add-faculty-section">
+                <h2>Add Faculty Details</h2>
+
+                <!-- Manual Input Form -->
+                <div class="manual-input">
+                    <h3>Manual Input</h3>
+                    <form id="faculty-form" method="POST">
+                        <div class="input-group">
+                            <label for="pen_no">PEN Number</label>
+                            <input type="text" name="pen_no" id="pen_no" placeholder="PEN Number" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" placeholder="Name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="dept_code">Department Code</label>
+                            <input type="text" name="dept_code" id="dept_code" placeholder="Department Code" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="designation">Designation</label>
+                            <input type="text" name="designation" id="designation" placeholder="Designation" required>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Submit</button>
+                    </form>
+                </div>
+            
+                <div class="csv-upload">
+                    <h3>CSV Upload</h3>
+                    <form id="csv-upload-form" method="POST" enctype="multipart/form-data">
+                        <div class="input-group">
+                            <label for="csv-file">Upload CSV File</label>
+                            <input type="file" name="csv-file" id="csv-file" accept=".csv" required>
+                        </div>
+                        <button type="submit" class="upload-btn">Upload</button>
+                        <button class="download-template-btn" onclick="downloadTemplate()">Download CSV Template</button>
+                    </form>
+                </div>
+
+                
+            <div class="search-section">
+                <h2>Search Faculty</h2>
+                <div class="search-filters">
+                    <input type="text" id="search-dept" placeholder="Search by Department Code">
+                    <input type="text" id="search-pen_no" placeholder="Search by PEN No">
+                    <button class="search-btn" onclick="searchFaculty()">Search</button>
+                </div>
+                <!-- Add this div to display the results -->
+                <div id="faculty-results"></div>
+            </div>
+            
+            <!-- Faculty Table Section -->
+            <div class="faculty-table-section">
+                <h2>Faculty Details</h2>
+                <table id="faculty-table">
+                    <thead>
+                        <tr>
+                            <th>PEN No</th>
+                            <th>Name</th>
+                            <th>Department Code</th>
+                            <th>Designation</th>
+                            <th>University Code</th>
+                            <th>College ID</th>
+                            <th>Password</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for faculty in faculties %}
+                        <tr id="faculty-{{ faculty._id }}">
+                            <td>{{ faculty.pen_no }}</td>
+                            <td>{{ faculty.name }}</td>
+                            <td>{{ faculty.dept_code }}</td>
+                            <td>{{ faculty.designation }}</td>
+                            <td>{{ faculty.univ_code }}</td>
+                            <td>{{ faculty.clg_id }}</td>
+                            <td id="password-{{ faculty._id }}">
+                                {{ faculty.password if faculty.password else 'Not Generated' }}
+                            </td>
+                            <td>
+                                <button class="generate-btn" onclick="generatePassword('{{ faculty._id }}')">Generate Password</button>
+                                <button class="edit-btn" onclick="editFaculty('{{ faculty._id }}')">Edit</button>
+                                <button class="delete-btn" onclick="deleteFaculty('{{ faculty._id }}')">Delete</button>
+                                <div id="message"></div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <!-- Hidden Edit Form -->
+                    <div id="editModal" style="display:none;">
+                        <div class="modal-content">
+                            <h3>Edit Faculty Details</h3>
+                            <form id="editFacultyForm">
+                                <input type="hidden" id="editFacultyId">
+                                <label>PEN_NO:</label><input type="text" id="editPen" required><br>
+                                <label>Name:</label><input type="text" id="editName" required><br>
+                                <label>Dept Code:</label><input type="text" id="editDeptCode" required><br>
+                                <label>Designation:</label><input type="text" id="editDesignation" required><br>
+                                <button type="submit">Save Changes</button>
+                                <button type="button" onclick="closeEditModal()">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </table>
+                <button class="generate-all-btn" onclick="generateAllPasswords()">Generate Passwords for All</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='admin2.js') }}"></script>
+</body>
+</html>

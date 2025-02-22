@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin1.css') }}">
+    <script>
+        function redirectToPage(page) {
+            window.location.href = page;
+        }
+    </script>
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="admin-container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="college-info">
+                <h1>{{College_Name}}</h1>
+                <p>{{University_Name}}</p>
+            </div>
+            <div class="top-bar-buttons">
+                <a href="{{ url_for('logout') }}" class="login-btn">Logout</a>
+                <a href="{{ url_for('edit_profile') }}" class="profile-btn">Edit Profile</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Boxes for Admin Actions -->
+            <div class="action-boxes">
+                <!-- Add Student Details -->
+                <div class="action-box">
+                    <h3>Add Student Details</h3>
+                    <p>Click here to add or update student information.</p>
+                    <button class="action-btn" onclick="redirectToPage('{{ url_for('add_student') }}')">Go</button>
+                </div>
+
+                <!-- Add Faculty Details -->
+                <div class="action-box">
+                    <h3>Add Faculty Details</h3>
+                    <p>Click here to add or update faculty information.</p>
+                    <button class="action-btn" onclick="redirectToPage('{{ url_for('add_faculty') }}')">Go</button>
+                </div>
+
+                <!-- Add Department Details -->
+                <div class="action-box">
+                    <h3>Add Department Details</h3>
+                    <p>Click here to add or update department information.</p>
+                    <button class="action-btn" onclick="redirectToPage('{{ url_for('add_department') }}')">Go</button>
+                </div>
+
+                <!-- Add Schema and Syllabus -->
+                <div class="action-box">
+                    <h3>Add Schema & Syllabus</h3>
+                    <p>Click here to manage course schema and syllabus.</p>
+                    <button class="action-btn" onclick="redirectToPage('#')">Go</button>
+                </div>
+
+                <!-- Add Internal Assessment Tools -->
+                <div class="action-box">
+                    <h3>Add Internal Assessment Tools</h3>
+                    <p>Click here to manage internal assessment tools.</p>
+                    <button class="action-btn" onclick="redirectToPage('#')">Go</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    background-color: #1b1b1b;
+    color: white;
+}
+
+/* Admin Container */
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #292929;
+    padding: 20px 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.top-bar .college-info h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #44a3d2;
+}
+
+.top-bar .college-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #ddd;
+}
+
+.top-bar .top-bar-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.top-bar .top-bar-buttons a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.top-bar .top-bar-buttons .login-btn {
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+}
+
+.top-bar .top-bar-buttons .profile-btn {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+}
+
+.top-bar .top-bar-buttons a:hover {
+    opacity: 0.9;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: #1b1b1b;
+}
+
+.main-content .action-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center; /* Centers items */
+}
+
+.main-content .action-boxes .box {
+    width: calc(50% - 15px); /* Two columns */
+}
+
+@media (max-width: 600px) {
+    .main-content .action-boxes .box {
+        width: 100%; /* Full width on small screens */
+    }
+}
+
+
+
+/* Action Boxes */
+.action-box {
+    background: #292929;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.action-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.action-box h3 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+    color: #44a3d2;
+}
+
+.action-box p {
+    margin: 0 0 15px;
+    font-size: 1rem;
+    color: #ddd;
+}
+
+.action-box .action-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.action-box .action-btn:hover {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+}

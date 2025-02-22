@@ -1,0 +1,297 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    background-color: #1b1b1b;
+    color: white;
+}
+
+/* Faculty Container */
+.faculty-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #292929;
+    padding: 20px 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.top-bar .college-info h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #44a3d2;
+}
+
+.top-bar .college-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #ddd;
+}
+
+.top-bar .top-bar-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.top-bar .top-bar-buttons a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.top-bar .top-bar-buttons .login-btn {
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+}
+
+.top-bar .top-bar-buttons .profile-btn {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+}
+
+.top-bar .top-bar-buttons a:hover {
+    opacity: 0.9;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background: #1b1b1b;
+}
+
+/* Add Faculty Section */
+.add-faculty-section {
+    margin-bottom: 30px;
+}
+
+.add-faculty-section h2 {
+    color: #44a3d2;
+    margin-bottom: 20px;
+}
+
+.manual-input, .csv-upload {
+    background: #292929;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.manual-input h3, .csv-upload h3 {
+    margin: 0 0 15px;
+    color: #44a3d2;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ddd;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #3a3a3a;
+    color: white;
+}
+
+.submit-btn, .upload-btn {
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover, .upload-btn:hover {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+}
+/* Styles for the edit modal */
+#editModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#editModal .modal-content {
+    background: #292929;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#editModal h3 {
+    color: #44a3d2;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#editModal label {
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+}
+
+#editModal input[type="text"],
+#editModal input[type="hidden"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #3a3a3a;
+    color: white;
+}
+
+#editModal button[type="submit"] {
+    background: #44a3d2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#editModal button[type="submit"]:hover {
+    background: #1e588c;
+}
+
+#editModal button[type="button"] {
+    background: #ff4b2b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#editModal button[type="button"]:hover {
+    background: #ff416c;
+}
+
+
+/* Search Section */
+.search-section {
+    margin-bottom: 30px;
+}
+
+.search-section h2 {
+    color: #44a3d2;
+    margin-bottom: 20px;
+}
+
+.search-filters {
+    display: flex;
+    gap: 10px;
+}
+
+.search-filters input {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #3a3a3a;
+    color: white;
+}
+
+/* Faculty Table Section */
+.faculty-table-section {
+    background: #292929;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.faculty-table-section h2 {
+    color: #44a3d2;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #555;
+}
+
+table th {
+    background: #1e588c;
+    color: white;
+}
+
+table td {
+    background: #3a3a3a;
+}
+
+.action-btn {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.edit-btn {
+    background: #44a3d2;
+    color: white;
+}
+
+.delete-btn {
+    background: #ff4b2b;
+    color: white;
+}
+
+.generate-btn {
+    background: #1e588c;
+    color: white;
+}
+
+.generate-all-btn {
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+.generate-all-btn:hover {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+}
