@@ -1,0 +1,233 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    background-color: #1b1b1b;
+    color: white;
+}
+
+/* Add Department Container */
+.add-department-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #292929;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #292929;
+    padding: 20px 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.top-bar .college-info h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #44a3d2;
+}
+
+.top-bar .college-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #ddd;
+}
+
+.top-bar .top-bar-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.top-bar .top-bar-buttons a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.top-bar .top-bar-buttons .login-btn {
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+}
+
+.top-bar .top-bar-buttons .profile-btn {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+}
+
+.top-bar .top-bar-buttons a:hover {
+    opacity: 0.9;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background: #1b1b1b;
+}
+
+.main-content h2 {
+    color: #44a3d2;
+    margin-bottom: 20px;
+}
+
+/* Form Styles */
+.centered-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 16px;
+    color: #ddd;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #3a3a3a;
+    color: white;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: #44a3d2;
+    outline: none;
+}
+
+/* HOD Credentials Section */
+.main-content h3 {
+    font-size: 20px;
+    color: #44a3d2;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+}
+
+/* Existing Departments Table */
+.department-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #292929;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.department-table th,
+.department-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #555;
+}
+
+.department-table th {
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+    color: white;
+    font-weight: bold;
+}
+
+.department-table td {
+    background: #3a3a3a;
+    color: white;
+}
+
+.department-table tbody tr:hover {
+    background: #444;
+}
+
+.department-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Action Buttons */
+.edit-btn, .delete-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.edit-btn {
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+    color: white;
+    margin-right: 5px;
+}
+
+.edit-btn:hover {
+    background: linear-gradient(90deg, #1e588c, #44a3d2);
+}
+
+.delete-btn {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+    color: white;
+}
+
+.delete-btn:hover {
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .top-bar-buttons {
+        margin-top: 10px;
+    }
+
+    .main-content h2 {
+        font-size: 24px;
+    }
+
+    .main-content h3 {
+        font-size: 18px;
+    }
+
+    .department-table th,
+    .department-table td {
+        padding: 10px;
+    }
+
+    .edit-btn, .delete-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}

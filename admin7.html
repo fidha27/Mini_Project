@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Evaluation Tools</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin4.css') }}">
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} mt-3">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Container -->
+    <div class="schema-container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="college-info">
+                <h1>{{ college_name }}</h1>
+                <p>{{ university_name }}</p>
+            </div>
+            <div class="top-bar-buttons">
+                <a href="{{ url_for('logout') }}" class="login-btn">Logout</a>
+                <a href="{{ url_for('edit_profile') }}" class="profile-btn">Edit Profile</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Add Evaluation Tool Section -->
+            <div class="add-schema-section">
+                <h2>Add Evaluation Tool</h2>
+                <form id="evaluation-tool-form" method="POST" action="{{ url_for('add_tool') }}">
+                    <div class="input-group">
+                        <label for="schema-select">Select Schema</label>
+                        <select id="schema-select" name="schema_id" required>
+                            <option value="">-- Select Schema --</option>
+                            {% for schema in schemas %}
+                            <option value="{{ schema._id }}">{{ schema.schema_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="tool-name">Tool Name</label>
+                        <input type="text" id="tool-name" name="tool_name" placeholder="Enter Tool Name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="tool-description">Tool Description</label>
+                        <textarea id="tool-description" name="tool_description" placeholder="Enter Tool Description" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Add Tool</button>
+                </form>
+            </div>
+
+            <!-- Evaluation Tools List Section -->
+            <div class="schema-table-section">
+                <h2>Evaluation Tools</h2>
+                <table id="evaluation-tools-table">
+                    <thead>
+                        <tr>
+                            <th>Schema Name</th>
+                            <th>Tool Name</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tool in tool_collection %}
+                        <tr>
+                            <td>{{ tool.schema_name }}</td>
+                            <td>{{ tool.tool_name }}</td>
+                            <td>{{ tool.tool_description }}</td>
+                            <td>
+                                <button class="edit-btn" onclick="openEditToolModal('{{ tool._id }}')">Edit</button>
+                                <button class="delete-btn" onclick="deleteTool('{{ tool._id }}')">Delete</button>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5">No evaluation tools added yet.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Edit Evaluation Tool Modal -->
+            <div id="editToolModal" style="display:none;">
+                <div class="modal-content">
+                    <h3>Edit Evaluation Tool</h3>
+                    <form id="editToolForm">
+                        <input type="hidden" id="edit-tool-id" name="tool_id">
+                        <div class="input-group">
+                            <label for="edit-tool-name">Tool Name</label>
+                            <input type="text" id="edit-tool-name" name="tool_name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="edit-tool-description">Tool Description</label>
+                            <textarea id="edit-tool-description" name="tool_description" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Save Changes</button>
+                        <button type="button" onclick="closeEditToolModal()" class="cancel-btn">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initially hide the table
+            document.getElementById("evaluation-tools-table").style.display = "none";
+        });
+        
+        
+        document.getElementById('schema-select').addEventListener('change', function() {
+            const schemaId = this.value;
+            const table = document.getElementById("evaluation-tools-table");
+            const tableBody = document.querySelector("#evaluation-tools-table tbody");
+        
+            if (!schemaId) {
+                table.style.display = "none"; // Hide table if no schema is selected
+                return;
+            }
+        
+            fetch(`/get_tools/${schemaId}`)
+                .then(response => response.json())
+                .then(data => {
+                    tableBody.innerHTML = ""; // Clear previous data
+        
+                    if (data.length === 0) {
+                        tableBody.innerHTML = "<tr><td colspan='5'>No evaluation tools added yet.</td></tr>";
+                    } else {
+                        data.forEach(tool => {
+                            tableBody.innerHTML += `
+                                <tr>
+                                    <td>${tool.schema_name}</td>
+                                    <td>${tool.tool_name}</td>
+                                    <td>${tool.tool_description}</td>
+                                    <td>
+                                        <button class="edit-btn" onclick="openEditToolModal('${tool._id}')">Edit</button>
+                                        <button class="delete-btn" onclick="deleteTool('${tool._id}')">Delete</button>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                    }
+        
+                    table.style.display = "table"; // Show table when data is available
+                })
+                .catch(error => console.error("Error fetching tools:", error));
+        });
+        
+        
+        // Function to open the edit tool modal
+        function openEditToolModal(toolId) {
+            fetch(`/get_evaluation_tool/${toolId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('edit-tool-id').value = data._id;
+                    document.getElementById('edit-tool-name').value = data.tool_name;
+                    document.getElementById('edit-tool-description').value = data.tool_description;
+                    document.getElementById('editToolModal').style.display = 'flex';
+                })
+                .catch(error => console.error('Error fetching tool details:', error));
+        }
+
+        // Function to close the edit tool modal
+        function closeEditToolModal() {
+            document.getElementById('editToolModal').style.display = 'none';
+        }
+
+        // Function to delete a tool
+        function deleteTool(toolId) {
+            if (confirm('Are you sure you want to delete this tool?')) {
+                fetch(`/delete_evaluation_tool/${toolId}`, { method: 'DELETE' })
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload(); // Reload the page to reflect changes
+                        } else {
+                            alert('Failed to delete tool.');
+                        }
+                    })
+                    .catch(error => console.error('Error deleting tool:', error));
+            }
+        }
+
+        // Handle form submission for editing a tool
+        document.getElementById('editToolForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const toolId = document.getElementById('edit-tool-id').value;
+            const updatedData = {
+                tool_name: document.getElementById('edit-tool-name').value,
+                tool_description: document.getElementById('edit-tool-description').value,
+            };
+
+            fetch(`/update_evaluation_tool/${toolId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload(); // Reload the page to reflect changes
+                } else {
+                    alert('Failed to update tool.');
+                }
+            })
+            .catch(error => console.error('Error updating tool:', error));
+        });
+    </script>
+</body>
+</html>

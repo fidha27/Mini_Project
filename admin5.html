@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Internal Assessment Tools</title>
+    <link rel="stylesheet" href="admin5.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="assessment-container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="college-info">
+                <h1>College Name</h1>
+                <p>University Name</p>
+            </div>
+            <div class="top-bar-buttons">
+                <a href="#" class="login-btn">Logout</a>
+                <a href="#" class="profile-btn">Edit Profile</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Add Tool Section -->
+            <div class="add-tool-section">
+                <h2>Add Internal Assessment Tool</h2>
+                <form id="tool-form">
+                    <div class="input-group">
+                        <label for="tool-name">Tool Name</label>
+                        <input type="text" id="tool-name" name="tool-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="tool-description">Tool Description</label>
+                        <textarea id="tool-description" name="tool-description" rows="3" required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="schema-select">Select Schema:</label>
+                        <select id="schema-select">
+                            <!-- Schema options will be dynamically added here -->
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">Add Tool</button>
+                </form>
+            </div>
+
+            <!-- Tools Table Section -->
+            <div class="tools-table-section">
+                <h2>Internal Assessment Tools</h2>
+                <table id="tools-table">
+                    <thead>
+                        <tr>
+                            <th>Schema Name</th>
+                            <th>Tool Name</th>
+                            <th>Tool Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Tool rows will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin5.js"></script>
+</body>
+</html>

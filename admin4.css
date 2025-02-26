@@ -1,0 +1,359 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    background-color: #1b1b1b;
+    color: white;
+}
+
+/* Schema Container */
+.schema-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #292929;
+    padding: 20px 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.top-bar .college-info h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #44a3d2;
+}
+
+.top-bar .college-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #ddd;
+}
+
+.top-bar .top-bar-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.top-bar .top-bar-buttons a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.top-bar .top-bar-buttons .login-btn {
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+}
+
+.top-bar .top-bar-buttons .profile-btn {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+}
+
+.top-bar .top-bar-buttons a:hover {
+    opacity: 0.9;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background: #1b1b1b;
+}
+
+/* Add Schema Section */
+.add-schema-section {
+    margin-bottom: 30px;
+}
+
+.add-schema-section h2 {
+    color: #44a3d2;
+    margin-bottom: 20px;
+}
+
+.add-schema-section .input-group {
+    margin-bottom: 15px;
+}
+
+.add-schema-section .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ddd;
+}
+
+.add-schema-section .input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #3a3a3a;
+    color: white;
+}
+
+.add-schema-section .submit-btn {
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-schema-section .submit-btn:hover {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+}
+
+.submit-btn, .upload-btn {
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .alert-success {
+    background-color: #4CAF50; /* Green */
+  }
+
+  .alert-error {
+    background-color: #f44336; /* Red */
+  }
+
+.submit-btn:hover, .upload-btn:hover {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+}
+
+#editModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#editModal .modal-content {
+    background: #292929;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#editModal h3 {
+    color: #44a3d2;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#editModal label {
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+}
+
+#editModal input[type="text"],
+#editModal input[type="hidden"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #3a3a3a;
+    color: white;
+}
+
+#editModal button[type="submit"] {
+    background: #44a3d2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#editModal button[type="submit"]:hover {
+    background: #1e588c;
+}
+
+#editModal button[type="button"] {
+    background: #ff4b2b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#editModal button[type="button"]:hover {
+    background: #ff416c;
+}
+
+/* Add Courses Section */
+.add-courses-section {
+    margin-bottom: 30px;
+}
+
+.add-courses-section h2 {
+    color: #44a3d2;
+    margin-bottom: 20px;
+}
+
+.add-courses-section .select-schema {
+    margin-bottom: 20px;
+}
+
+.add-courses-section .select-schema label {
+    margin-right: 10px;
+    color: #ddd;
+}
+
+.add-courses-section .select-schema select {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #3a3a3a;
+    color: white;
+}
+
+.add-courses-section .manual-input, .add-courses-section .csv-upload {
+    background: #292929;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.add-courses-section .manual-input h3, .add-courses-section .csv-upload h3 {
+    margin: 0 0 15px;
+    color: #44a3d2;
+}
+
+.add-courses-section .input-group {
+    margin-bottom: 15px;
+}
+
+.add-courses-section .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ddd;
+}
+
+.add-courses-section .input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #3a3a3a;
+    color: white;
+}
+
+.add-courses-section .submit-btn, .add-courses-section .upload-btn {
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-courses-section .submit-btn:hover, .add-courses-section .upload-btn:hover {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+}
+
+/* Schema and Courses Table Section */
+.schema-table-section {
+    background: #292929;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.schema-table-section h2 {
+    color: #44a3d2;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #555;
+}
+
+table th {
+    background: #1e588c;
+    color: white;
+}
+
+table td {
+    background: #3a3a3a;
+}
+
+.action-btn {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.edit-btn {
+    background: #44a3d2;
+    color: white;
+}
+
+.delete-btn {
+    background: #ff4b2b;
+    color: white;
+}
+
+.export-btn {
+    background: linear-gradient(90deg, #44a3d2, #1e588c);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+.export-btn:hover {
+    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+}
