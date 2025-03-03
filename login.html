@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="login-section">
+      <h1>WELCOME</h1>
+      <form id="loginForm">
+        <input type="text" name="pen_no" id="pen_no" placeholder="PEN-NO" required>
+        <input type="password" name="psw" id="psw" placeholder="PASSWORD" required>
+        <button type="submit">LOGIN</button>
+      </form>
+      <p id="errorMessage" style="color: red; display: none;">Invalid Credentials!</p>
+    </div>
+    <div class="image-section">
+      <img src="https://plus.unsplash.com/premium_vector-1725609636000-2712e4cc893a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmFjdWx0eXxlbnwwfHwwfHx8MA%3D%3D" 
+      alt="Lock Icon" width="800" height="400">
+    </div>
+  </div>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function (event) {
+      event.preventDefault(); // Prevent default form submission
+  
+      let pen_no = document.getElementById("pen_no").value;
+      let password = document.getElementById("psw").value;
+  
+      let response = await fetch("{{ url_for('faculty_login') }}", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }, // 🔹 Set JSON header
+        body: JSON.stringify({ pen_no: pen_no, password: password }) // 🔹 Send as JSON
+      });
+  
+      let result = await response.json(); // Parse JSON response
+  
+      if (result.success) {
+        window.location.href = result.redirect_url; // Redirect to faculty dashboard
+      } else {
+        document.getElementById("errorMessage").style.display = "block"; // Show error message
+      }
+    });
+  </script>
+</body>
+</html>
