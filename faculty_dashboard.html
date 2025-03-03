@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='faculty_dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Faculty Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{ faculty.name }}!</h1>
+        <nav>
+            <a href="{{ url_for('faculty_logout') }}">Logout</a>
+            <a href="{{ url_for('faculty_change_password_page') }}">Edit Password</a>
+        </nav>
+    </header>
+    
+
+    <aside id="sidebar">
+        <div id="logo">
+            <img src="{{ url_for('static', filename='logo1.png') }}" alt="Logo">
+        </div>
+        <ul>
+            <li><a href="{{ url_for('faculty_dashboard') }}"><i class="fas fa-chalkboard-teacher"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-chalkboard-teacher"></i>Tutorial</a></li>
+        </ul>
+        <div id="advisor-tab" style="display: none;">
+            <h3>📌 Advisor</h3>
+            <a href="{{ url_for('faculty_dashboard') }}">Batch Details</a>
+        </div>
+    </aside>
+
+    <main>
+        <section class="faculty-card">
+            <div class="profile-pic"></div>
+            <div>
+                <h2>{{ faculty.name }}</h2>
+                <p>Department: {{ faculty.dept_code }}</p>
+                <p>Advisor Status: {% if faculty.advisor_batches %} Yes {% else %} No {% endif %}</p>
+            </div>
+        </section>
+    
+        <h2 class="section-title">Teaching Batches</h2>
+
+        <div id="teaching-batches" class="batch-container">
+            {% if teaching_batches %}
+                {% for batch in teaching_batches %}
+                <div class="batch-card">
+                    <h3>Batch {{ batch.batch }}</h3>
+                    <p>Course: {{ batch.course_title }}</p>
+                    <a href="{{ url_for('view_batch', semester=batch.batch) }}" class="view-batch-btn">View Batch</a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No assigned batches found.</p>
+            {% endif %}
+        </div>
+        {% if is_advisor %}
+            <h2>Advisor Section</h2>
+            <a href="{{ url_for('advisor_dashboard') }}" class="advisor-link">Go to Advisor Dashboard</a>
+        {% endif %}
+    </main>
+    <script src="{{ url_for('static', filename='faculty_dashboard.js') }}"></script>
+</body>
+</html>

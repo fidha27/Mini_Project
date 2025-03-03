@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal Assessment Tool Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='faculty3.css') }}">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Internal Assessment Tool Selection</h1>
+        <nav>
+            <button id="home-btn">🏠 HOME</button>
+            <button id="mark-upload-btn">📂 Mark Upload</button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h2>Select Tools and Set Weightage for COs</h2>
+
+        <!-- Buttons -->
+        <div class="button-container">
+            <button id="add-tool-btn">+ Add Tool</button>
+        </div>
+
+        <!-- Hidden CO List Data for JavaScript Processing -->
+        <div id="co-list-data" style="display: none;">
+            {{ co_list | tojson }}
+        </div>
+        
+        <!-- Tool Selection Table -->
+        <section class="tool-form">
+            <table>
+                <thead>
+                    <tr>
+                        <th>TOOLS</th>
+                        {% for co in co_list %}
+                            <th>CO{{ co }}</th> <!-- Dynamic CO headers -->
+                        {% endfor %}
+                        <th>Action</th> <!-- Delete Button Column -->
+                    </tr>
+                </thead>
+                <tbody id="tool-table-body">
+                    <!-- Dynamic rows will be inserted here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Calculate Button -->
+        <div class="calculate-container">
+            <button id="calculate-btn">Calculate</button>
+        </div>
+
+        <!-- Preview Section -->
+        <section id="preview-section" class="hidden">
+            <h3>Configuration Preview</h3>
+            <table id="preview-table">
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        {% for co in co_list %}
+                            <th>CO{{ co }}</th> <!-- Dynamic CO headers -->
+                        {% endfor %}
+                        <th>Action</th> <!-- Delete Button Column -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Preview rows will be dynamically added here -->
+                </tbody>
+            </table>
+            <button id="confirm-btn">Confirm Submission</button>
+        </section>
+        
+    </main>
+
+    <script src="{{ url_for('static', filename='faculty3.js') }}" defer></script>
+
+</body>
+</html>

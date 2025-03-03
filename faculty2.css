@@ -1,0 +1,223 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #1e588c;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header .logo {
+    height: 50px;
+}
+
+#home-btn {
+    background-color: #44a3d2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#home-btn:hover {
+    background-color: #ff4b2b;
+}
+
+main {
+    padding: 20px;
+}
+
+.upload-container, .input-container, .button-container, .approval-container, .matrix-container {
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.input-container input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex: 1 1 200px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1e588c;
+    color: white;
+    cursor: pointer;
+}
+
+.button-container button:hover {
+    background-color: #ff4b2b;
+}
+
+.approval-container {
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.matrix-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.matrix-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.matrix-container th, .matrix-container td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.matrix-container th {
+    background-color: #1e588c;
+    color: white;
+}
+
+.matrix-container td {
+    cursor: pointer;
+}
+
+.matrix-container td.marked {
+    background-color: #d4edda;
+}
+
+#generate-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1e588c;
+    color: white;
+    cursor: pointer;
+}
+
+#generate-btn:hover {
+    background-color: #ff4b2b;
+}
+
+/* Table Header */
+thead {
+    background: #1e588c;
+    color: white;
+}
+
+thead th {
+    padding: 12px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Table Body */
+tbody tr {
+    background: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    transition: background 0.3s ease;
+}
+
+tbody tr:nth-child(even) {
+    background: #f1f1f1;
+}
+
+tbody tr:hover {
+    background: #e0f3ff;
+}
+
+/* Table Data Cells */
+td {
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Buttons */
+button {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: opacity 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Edit Button */
+button[onclick^="editCO"] {
+    background: #5ab54e;
+    color: black;
+}
+
+/* Delete Button */
+button[onclick^="deleteCO"] {
+    background: #db2e42;
+    color: white;
+}
+
+.calculate-btn-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#calculate-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+#calculate-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Style for matrix cells */
+.matrix-cell {
+    cursor: pointer;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+/* Style for marked cells */
+.matrix-cell.marked {
+    background-color: #e0f3ff; /* Light blue background for marked cells */
+}
+
+/* Style for cell values */
+.cell-value {
+    font-weight: bold;
+}

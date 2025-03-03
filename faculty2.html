@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Course Outcome</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='faculty2.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo1.png') }}" alt="Logo" class="logo">
+        <h1>Add Course Outcome</h1>
+        <li><a href="url_for{{view_batch}}"><i class="fas fa-home"></i> HOME</a></li>
+    </header>
+
+    <main>
+        <div class="input-container">
+            <input type="text" id="co-no" placeholder="Enter CO Number">
+            <input type="text" id="description" placeholder="Enter Description">
+            <input type="number" id="bloom-level" min="1" max="6" placeholder="Select Bloom's Level (1-6)">
+            <input type="number" id="set-threshold" placeholder="CO specific threshold">
+            <button id="add-co-btn">Submit CO</button>
+        </div>
+
+        <section class="co-status-container">
+            <h2>CO Status</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>CO Number</th>
+                        <th>Description</th>
+                        <th>Bloom's Level</th>
+                        <th>Threshold</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="co-status-body">
+                    <!-- COs will be dynamically added here -->
+                </tbody>
+            </table>
+        </section>
+        <section class="co-po-matrix">
+            <h2>CO-PO Correlation Matrix</h2>
+            <div id="matrix-container" class="hidden">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>CO Number</th>
+                            <th>PO1</th> <th>PO2</th> <th>PO3</th> <th>PO4</th> <th>PO5</th>
+                            <th>PO6</th> <th>PO7</th> <th>PO8</th> <th>PO9</th> <th>PO10</th>
+                            <th>PO11</th> <th>PO12</th>
+                        </tr>
+                    </thead>
+                    <tbody id="matrix-body">
+                        <!-- CO-PO Matrix will be dynamically generated here -->
+                    </tbody>
+                </table>
+                <div class="calculate-btn-container">
+                    <button id="calculate-btn" onclick="calculateCorrelation()">📊 Calculate Correlation</button>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    <script src="{{ url_for('static', filename='faculty2.js') }}" defer></script>
+
+</body>
+</html>

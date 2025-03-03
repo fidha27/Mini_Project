@@ -1,0 +1,198 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Header Styles */
+  header {
+    background-color: #1e588c;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  header h1 {
+    font-size: 22px;
+    margin: 0;
+  }
+  
+  header nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  header nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  header nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Sidebar Styles */
+  #sidebar {
+    background-color: #fff;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 80px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 60px; /* Adjusted to account for the fixed header */
+    z-index: 999;
+  }
+  
+  #sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #sidebar ul li {
+    margin: 15px 0;
+  }
+  
+  #sidebar ul li a {
+    color: #1e588c;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  #sidebar ul li a:hover {
+    background-color: #1e588c;
+    color: #fff;
+  }
+  
+  /* Main Content Styles */
+  main {
+    margin-left: 250px;
+    padding: 20px;
+    margin-top: 80px; /* Adjusted to account for the fixed header */
+    width: calc(100% - 250px); /* Take remaining space */
+    overflow-x: auto;
+    z-index: 1; /* Ensure main content is above sidebar */
+  }
+  
+  .batch-info, .course-details, #matrix-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .batch-info h2, .course-details h2, #matrix-container h2 {
+    font-size: 24px;
+    color: #1e588c;
+    margin-bottom: 20px;
+  }
+  
+  /* Matrix Container */
+#matrix-container {
+    margin-top: 20px;
+}
+
+#matrix-container table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#matrix-container th, #matrix-container td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#matrix-container th {
+    background-color: #1e588c;
+    color: #fff;
+    font-weight: 600;
+}
+
+#matrix-container tr:hover {
+    background-color: #f1f1f1;
+}
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  
+  table th {
+    background-color: #1e588c;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  table tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  table tr:last-child {
+    border-bottom: none;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    #sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+      padding-top: 20px;
+      margin-top: 0;
+    }
+  
+    main {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
