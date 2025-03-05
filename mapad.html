@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Map Advisor</title>
-    <link rel="stylesheet" href="mapad.css">
-    <script src="mapad.js" defer></script>
+    <title>Map Advisor and Module Coordinator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mapad.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <img src="logo2.jpeg" alt="Logo" class="logo" height="65">
+        <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo" class="logo" height="65">
         <div class="header-text">
-            <h1>Welcome, <span id="hod-name">[HOD Name]</span></h1>
-            <h2 class="department-name">DEPARTMENT NAME</h2>
+            <h1>Welcome, <span id="hod-name">{{ hod_name }}</span></h1>
+            <h2 class="department-name">{{ department_name }}</h2>
         </div>
         <nav>
             <div class="logout">
@@ -25,58 +24,101 @@
 
     <aside id="sidebar">
         <ul>
-            <li><a href="hod.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="batches.html"><i class="fas fa-book"></i> Batches</a></li>
-            <li><a href="setth.html"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
-            <li><a href="mapad.html"><i class="fas fa-user-cog"></i> Map Advisor</a></li>
+            <li><a href="{{ url_for('hod') }}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{{ url_for('batches') }}"><i class="fas fa-book"></i> Batches</a></li>
+            <li><a href="{{ url_for('setth') }}"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
+            <li><a href="{{ url_for('mapad') }}"><i class="fas fa-chalkboard-teacher"></i> Map Advisor</a></li>
         </ul>
     </aside>
 
     <main>
-        <section class="advisor-mapping">
-            <h1>Map Advisor</h1>
-            <table>
+        <!-- Map Advisor Section -->
+        <section class="map-section">
+            <h2 class="section-heading">MAP ADVISOR</h2>
+            <button id="add-batch-btn">Add Batch</button>
+            <table id="advisor-table">
                 <thead>
                     <tr>
-                        <th>Batch Name</th>
-                        <th>Name of Advisors</th>
-                        <th>Semester</th>
+                        <th>Batch ID</th>
+                        <th>Advisor</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="advisor-table">
+                <tbody>
+                    {% for batch in batches %}
                     <tr>
-                        <td>CS 2022-2026</td>
-                        <td><span class="advisor-name">Anu Bonia</span>
+                        <td>{{ batch.batch_id }}</td>
+                        <td>
+                            <span class="advisor-name">{{ batch.adname }}</span>
                             <select class="advisor-select hidden">
-                                <option value="Anu Bonia">Anu Bonia</option>
-                                <option value="Alfred Thomas">Alfred Thomas</option>
-                                <option value="New Advisor">New Advisor</option>
+                                {% for faculty in faculties %}
+                                <option value="{{ faculty.name }}">{{ faculty.name }}</option>
+                                {% endfor %}
                             </select>
                         </td>
-                        <td>S6</td>
                         <td>
-                            <button class="edit-btn">Edit</button>
-                            <button class="save-btn hidden">Save</button>
+                            <button class="edit-btn" data-batch-id="{{ batch.batch_id }}">Edit</button>
+                            <button class="save-btn hidden" data-batch-id="{{ batch.batch_id }}">Save</button>
+                            <button class="delete-btn" data-batch-id="{{ batch.batch_id }}">Delete</button>
                         </td>
                     </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Map Module Coordinator Section -->
+        <section class="map-section">
+            <h2 class="section-heading">MAP MODULE COORDINATOR</h2>
+            <button id="add-module-btn">Add Module</button>
+            <table id="module-table">
+                <thead>
                     <tr>
-                        <td>CS 2023-2027</td>
-                        <td><span class="advisor-name">Praveen Pillai</span>
-                            <select class="advisor-select hidden">
-                                <option value="Praveen Pillai">Praveen Pillai</option>
-                                <option value="Another Advisor">Another Advisor</option>
+                        <th>Module Name</th>
+                        <th>Module Coordinator</th>
+                        <th>Schema</th>
+                        <th>Courses</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for module in modules %}
+                    <tr>
+                        <td>{{ module.module_name }}</td>
+                        <td>
+                            <span class="mc-name">{{ module.mcname }}</span>
+                            <select class="mc-select hidden">
+                                {% for faculty in faculties %}
+                                <option value="{{ faculty.name }}">{{ faculty.name }}</option>
+                                {% endfor %}
                             </select>
                         </td>
-                        <td>S4</td>
                         <td>
-                            <button class="edit-btn">Edit</button>
-                            <button class="save-btn hidden">Save</button>
+                            <select class="schema-select">
+                                {% for schema in schemas %}
+                                <option value="{{ schema.schema_name }}">{{ schema.schema_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <select class="course-select" multiple>
+                                {% for course in courses %}
+                                <option value="{{ course.code }}">{{ course.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <button class="edit-mc-btn" data-module-id="{{ module.module_name }}">Edit</button>
+                            <button class="save-mc-btn hidden" data-module-id="{{ module.module_name }}">Save</button>
+                            <button class="delete-mc-btn" data-module-id="{{ module.module_name }}">Delete</button>
                         </td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </section>
     </main>
+
+    <script src="{{ url_for('static', filename='mapad.js') }}"></script>
 </body>
 </html>
