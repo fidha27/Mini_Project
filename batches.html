@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Batches Page</title>
-    <link rel="stylesheet" href="batches.css"> <!-- Link to the same CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='hod.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <img src="logo2.jpeg" alt="Logo" class="logo" height="65">
+        <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo" class="logo" height="65">
         <div class="header-text">
-            <h1>Welcome, <span id="hod-name">[HOD Name]</span></h1>
+            <h1>Welcome, <span id="hod-name">{{ hod_name }}</span></h1>
             <h2 class="department-name">DEPARTMENT OF COMPUTER SCIENCE</h2>
         </div>
         <nav>
-            <div class="logout">
+            <div class="logout" onclick="logout()">
                 <i class="fas fa-power-off"></i>
                 <p>Logout</p>
             </div>
@@ -24,10 +24,10 @@
 
     <aside id="sidebar">
         <ul>
-            <li><a href="hod.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="batches.html"><i class="fas fa-book"></i> Batches</a></li>
-            <li><a href="setth.html"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
-            <li><a href="mapad.html"><i class="fas fa-chalkboard-teacher"></i> Map Advisor</a></li>
+            <li><a href="{{ url_for('hod') }}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{{ url_for('batches') }}"><i class="fas fa-book"></i> Batches</a></li>
+            <li><a href="{{ url_for('setth') }}"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
+            <li><a href="{{ url_for('mapad') }}"><i class="fas fa-chalkboard-teacher"></i> Map Advisor</a></li>
         </ul>
     </aside>
 
@@ -38,24 +38,22 @@
             <div class="dropdown-container">
                 <select id="batch">
                     <option value="">Select Batch</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
+                    {% for batch in batches %}
+                        <option value="{{ batch.batch_id }}">{{ batch.batch_id }}</option>
+                    {% endfor %}
                 </select>
+
                 <select id="semester">
                     <option value="">Select Semester</option>
-                    <option value="S1">S1</option>
-                    <option value="S2">S2</option>
-                    <option value="S3">S3</option>
+                    {% for i in range(1, 9) %}
+                        <option value="S{{ i }}">S{{ i }}</option>
+                    {% endfor %}
                 </select>
+
                 <select id="course">
                     <option value="">Select Course</option>
-                    <option value="CS101">CS101</option>
-                    <option value="CS102">CS102</option>
-                    <option value="CS103">CS103</option>
                 </select>
             </div>
-    
             <button class="next-button" onclick="validateCO()">Next</button>
         </section>
 
@@ -65,9 +63,9 @@
             <div class="dropdown-container">
                 <select id="poBatch">
                     <option value="">Select Batch</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
+                    {% for batch in batches %}
+                        <option value="{{ batch.batch_id }}">{{ batch.batch_id }}</option>
+                    {% endfor %}
                 </select>
             </div>
             <button class="next-button" onclick="validatePO()">Next</button>
@@ -75,26 +73,55 @@
     </main>
 
     <script>
+        document.getElementById("semester").addEventListener("change", function () {
+            var selectedSemester = this.value;
+            var courseDropdown = document.getElementById("course");
+
+            courseDropdown.innerHTML = '<option value="">Select Course</option>';
+
+            if (selectedSemester !== "") {
+                fetch(`/get_courses/${selectedSemester}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(course => {
+                            var option = document.createElement("option");
+                            option.value = course.code;
+                            option.textContent = course.title;
+                            courseDropdown.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error("Error fetching courses:", error));
+            }
+        });
+
         function validateCO() {
             var batch = document.getElementById("batch").value;
             var semester = document.getElementById("semester").value;
             var course = document.getElementById("course").value;
-            
+
             if (batch === "" || semester === "" || course === "") {
                 alert("Please select valid data for Batch, Semester, and Course.");
             } else {
-                window.location.href = "batchesco.html";
+                window.location.href = "{{ url_for('batchesco') }}";
             }
         }
 
         function validatePO() {
             var poBatch = document.getElementById("poBatch").value;
-            
+
             if (poBatch === "") {
                 alert("Please select a valid Batch.");
             } else {
-                alert("Proceeding to PO Attainment (Add appropriate navigation link here).")
+                alert("Proceeding to PO Attainment (Add appropriate navigation link here).");
             }
+        }
+
+        function logout() {
+            fetch("{{ url_for('logout') }}", {
+                method: "GET"
+            }).then(() => {
+                window.location.href = "{{ url_for('index') }}"; // Redirect to login page
+            });
         }
     </script>
 </body>
