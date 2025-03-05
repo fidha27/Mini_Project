@@ -4,135 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CO-PO Correlation Matrix</title>
-    <link rel="stylesheet" href="batchesco.css"> <!-- Link to the same CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='hod.css') }}"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <img src="logo2.jpeg" alt="Logo" class="logo" height="65">
+        <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo" class="logo" height="65">
         <div class="header-text">
             <h1>Welcome, <span id="hod-name">[HOD Name]</span></h1>
             <h2 class="department-name">DEPARTMENT OF COMPUTER SCIENCE</h2>
         </div>
-        <nav>
-            <div class="logout">
-                <i class="fas fa-power-off"></i>
-                <p>Logout</p>
-            </div>
-        </nav>
     </header>
 
-    <aside id="sidebar">
-        <ul>
-            <li><a href="hod.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="batches.html"><i class="fas fa-book"></i> Batches</a></li>
-            <li><a href="setth.html"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
-            <li><a href="mapad.html"><i class="fas fa-chalkboard-teacher"></i> Map Advisor</a></li>
-        </ul>
-    </aside>
-
     <main>
-        <!-- CO-PO Correlation Matrix Section -->
         <section class="correlation-matrix">
             <h2 class="section-heading">CO-PO CORRELATION MATRIX</h2>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>CO</th>
-                            <th>PO1</th>
-                            <th>PO2</th>
-                            <th>PO3</th>
-                            <th>PO4</th>
-                            <th>PO5</th>
-                            <th>PO6</th>
-                            <th>PO7</th>
-                            <th>PO8</th>
-                            <th>PO9</th>
-                            <th>PO10</th>
-                            <th>PO11</th>
-                            <th>PO12</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>CO1</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>CO2</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>CO3</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>CO4</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>CO5</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>CO</th>
+                        {% for i in range(1, 13) %}
+                        <th>PO{{ i }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CO1</td>
+                        {% for i in range(12) %}<td>3</td>{% endfor %}
+                    </tr>
+                </tbody>
+            </table>
         </section>
     </main>
 </body>
