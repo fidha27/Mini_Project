@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Set Threshold</title>
-    <link rel="stylesheet" href="setth2.css"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='hod.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <img src="logo2.jpeg" alt="Logo" class="logo" height="65">
+        <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo" class="logo" height="65">
         <div class="header-text">
-            <h1>Welcome, <span id="hod-name">[HOD Name]</span></h1>
-            <h2 class="department-name">DEPARTMENT OF COMPUTER SCIENCE</h2>
+            <h1>Welcome, <span id="hod-name">{{ hod_name }}</span></h1>
+            <h2 class="department-name">{{ department_name }}</h2>
         </div>
         <nav>
-            <div class="logout">
+            <div class="logout" onclick="logout()">
                 <i class="fas fa-power-off"></i>
                 <p>Logout</p>
             </div>
@@ -24,43 +24,44 @@
 
     <aside id="sidebar">
         <ul>
-            <li><a href="hod.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="batches.html"><i class="fas fa-book"></i> Batches</a></li>
-            <li><a href="setth.html"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
-            <li><a href="mapad.html"><i class="fas fa-chalkboard-teacher"></i> Map Advisor</a></li>
+            <li><a href="{{ url_for('hod') }}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{{ url_for('batches') }}"><i class="fas fa-book"></i> Batches</a></li>
+            <li><a href="{{ url_for('setth') }}"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
+            <li><a href="{{ url_for('mapad') }}"><i class="fas fa-chalkboard-teacher"></i> Map Advisor</a></li>
         </ul>
     </aside>
 
     <main>
-        <!-- Set Internal Evaluation Threshold Section -->
+        <!-- Set Direct Threshold Section -->
         <section class="threshold-section">
-            <h2 class="section-heading">SET INTERNAL EVALUATION THRESHOLD</h2>
+            <h2 class="section-heading">SET DIRECT THRESHOLD</h2>
             <div class="threshold-container">
-                <button class="threshold-button">Set Internal Threshold</button>
-                <input type="number" id="internal-threshold" class="threshold-dropdown" list="internal-percentages" min="0" max="100" step="1" placeholder="Select or type percentage">
-                <datalist id="internal-percentages">
-                    <script>
-                        for (let i = 0; i <= 100; i++) {
-                            document.write(`<option value="${i}">${i}%</option>`);
-                        }
-                    </script>
-                </datalist>
+                <input type="number" id="direct-threshold" class="threshold-dropdown" placeholder="Enter percentage" value="{{ direct_threshold }}">
             </div>
         </section>
 
-        <!-- Set External Evaluation Threshold Section -->
+        <!-- Set Indirect Threshold Section -->
         <section class="threshold-section">
-            <h2 class="section-heading">SET EXTERNAL EVALUATION THRESHOLD</h2>
+            <h2 class="section-heading">SET INDIRECT THRESHOLD</h2>
             <div class="threshold-container">
-                <button class="threshold-button">Set External Threshold</button>
-                <input type="number" id="external-threshold" class="threshold-dropdown" list="external-percentages" min="0" max="100" step="1" placeholder="Select or type percentage">
-                <datalist id="external-percentages">
-                    <script>
-                        for (let i = 0; i <= 100; i++) {
-                            document.write(`<option value="${i}">${i}%</option>`);
-                        }
-                    </script>
-                </datalist>
+                <input type="number" id="indirect-threshold" class="threshold-dropdown" placeholder="Enter percentage" value="{{ indirect_threshold }}">
+            </div>
+        </section>
+
+        <!-- Set CO Attainment Benchmark Section -->
+        <section class="threshold-section">
+            <h2 class="section-heading">SET CO ATTAINMENT BENCHMARK</h2>
+            <div class="threshold-container">
+                <label for="level3">Level 3:</label>
+                <input type="number" id="level3" class="threshold-dropdown" placeholder="Enter percentage" value="{{ co_attainment.level3 }}">
+            </div>
+            <div class="threshold-container">
+                <label for="level2">Level 2:</label>
+                <input type="number" id="level2" class="threshold-dropdown" placeholder="Enter percentage" value="{{ co_attainment.level2 }}">
+            </div>
+            <div class="threshold-container">
+                <label for="level1">Level 1:</label>
+                <input type="number" id="level1" class="threshold-dropdown" placeholder="Enter percentage" value="{{ co_attainment.level1 }}">
             </div>
         </section>
 
@@ -80,29 +81,52 @@
 
     <script>
         function saveThreshold() {
-            var internalThreshold = parseInt(document.getElementById("internal-threshold").value) || 0;
-            var externalThreshold = parseInt(document.getElementById("external-threshold").value) || 0;
-            var popupMessage = document.getElementById("popup-message");
+            const directThreshold = parseInt(document.getElementById("direct-threshold").value) || 0;
+            const indirectThreshold = parseInt(document.getElementById("indirect-threshold").value) || 0;
+            const level3 = parseInt(document.getElementById("level3").value) || 0;
+            const level2 = parseInt(document.getElementById("level2").value) || 0;
+            const level1 = parseInt(document.getElementById("level1").value) || 0;
+            const popupMessage = document.getElementById("popup-message");
 
-            if (internalThreshold + externalThreshold !== 100) {
-                popupMessage.textContent = "The sum of Internal and External Evaluation Threshold must be exactly 100.";
+            if (directThreshold + indirectThreshold !== 100) {
+                popupMessage.textContent = "The sum of Direct and Indirect Threshold must be exactly 100.";
                 document.getElementById("popup").style.display = "flex";
                 return;
             }
 
-            // Store values in localStorage
-            localStorage.setItem("internalThreshold", internalThreshold);
-            localStorage.setItem("externalThreshold", externalThreshold);
-
-            // Show success popup
-            popupMessage.textContent = "Saved successfully!";
-            document.getElementById("popup").style.display = "flex";
+            // Send data to the server
+            fetch("{{ url_for('save_threshold') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `direct-threshold=${directThreshold}&indirect-threshold=${indirectThreshold}&level3=${level3}&level2=${level2}&level1=${level1}`,
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
 
         function closePopup() {
             document.getElementById("popup").style.display = "none";
         }
-    </script>
 
+        function logout() {
+            fetch("{{ url_for('logout') }}", {
+                method: 'GET',
+            }).then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>
