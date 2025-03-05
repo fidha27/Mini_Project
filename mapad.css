@@ -9,12 +9,13 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f4f9;
   color: #333;
+  line-height: 1.6;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Header */
+/* Header Styles */
 header {
   background-color: #1e588c;
   color: #fff;
@@ -22,27 +23,69 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
   position: fixed;
   top: 0;
-  width: 100%;
+  left: 0;
   z-index: 1000;
 }
 
 .header-text {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
 }
 
 header h1 {
   font-size: 22px;
+  margin: 0;
+}
+
+.department-name {
+  font-size: 16px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0;
 }
 
 header nav {
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 
-/* Sidebar */
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+/* Logout Icon */
+.logout {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logout i {
+  font-size: 20px;
+}
+
+.logout p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Sidebar Styles */
 #sidebar {
   background-color: #fff;
   width: 250px;
@@ -50,13 +93,18 @@ header nav {
   position: fixed;
   top: 0;
   left: 0;
-  padding-top: 120px;
+  padding-top: 80px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  margin-top: 60px;
 }
 
 #sidebar ul {
   list-style: none;
   padding: 0;
+}
+
+#sidebar ul li {
+  margin: 15px 0;
 }
 
 #sidebar ul li a {
@@ -65,7 +113,8 @@ header nav {
   font-size: 18px;
   display: block;
   padding: 10px 20px;
-  transition: 0.3s;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 #sidebar ul li a:hover {
@@ -73,33 +122,24 @@ header nav {
   color: #fff;
 }
 
-/* Main Content */
+/* Main Content Styles */
 main {
   margin-left: 250px;
   padding: 20px;
   margin-top: 80px;
 }
 
-.advisor-mapping {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.advisor-mapping h1 {
-  color: #1e588c;
-}
-
-/* Table */
+/* Table Styles */
 table {
   width: 100%;
   border-collapse: collapse;
   background-color: #fff;
   border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-table th, table td {
+table th,
+table td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -108,38 +148,219 @@ table th, table td {
 table th {
   background-color: #1e588c;
   color: #fff;
+  font-weight: 600;
 }
 
-/* Buttons */
-.edit-btn, .save-btn {
-  background-color: #007bff;
-  color: white;
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Button Styles */
+.edit-btn {
+  background-color: #1e588c; /* Blue */
+  color: #fff;
+  padding: 8px 16px;
   border: none;
-  padding: 5px 10px;
-  cursor: pointer;
   border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.edit-btn:hover, .save-btn:hover {
-  background-color: #0056b3;
+.edit-btn:hover {
+  background-color: #154267; /* Darker Blue */
 }
 
-/* Hide elements */
+.save-btn {
+  background-color: #28a745; /* Green */
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #218838; /* Darker Green */
+}
+
+.delete-btn {
+  background-color: #dc3545; /* Red */
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: #c82333; /* Darker Red */
+}
+
+.add-btn {
+  background-color: #17a2b8; /* Teal */
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 20px;
+}
+
+.add-btn:hover {
+  background-color: #138496; /* Darker Teal */
+}
+
+/* Module Coordinator Button Styles */
+.edit-mc-btn {
+  background-color: #1e588c; /* Blue */
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-mc-btn:hover {
+  background-color: #154267; /* Darker Blue */
+}
+
+.save-mc-btn {
+  background-color: #28a745; /* Green */
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.save-mc-btn:hover {
+  background-color: #218838; /* Darker Green */
+}
+
+.delete-mc-btn {
+  background-color: #dc3545; /* Red */
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-mc-btn:hover {
+  background-color: #c82333; /* Darker Red */
+}
+
+/* Dropdown Styles */
+.advisor-select,
+.mc-select,
+.schema-select,
+.course-select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background-color: #f4f4f9;
+  color: #333;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.advisor-select:focus,
+.mc-select:focus,
+.schema-select:focus,
+.course-select:focus {
+  border-color: #1e588c;
+}
+
+.course-select {
+  height: 100px; /* Adjust height for multi-select dropdown */
+}
+
 .hidden {
   display: none;
+}
+
+/* Popup Styles */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.popup-content p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.popup-content button {
+  background-color: #1e588c;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.popup-content button:hover {
+  background-color: #154267;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   #sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding-top: 20px;
+    margin-top: 0;
   }
 
   main {
-      margin-left: 0;
-      width: 100%;
-      padding: 10px;
+    margin-left: 0;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .edit-btn,
+  .save-btn,
+  .delete-btn,
+  .add-btn,
+  .edit-mc-btn,
+  .save-mc-btn,
+  .delete-mc-btn {
+    width: 100%;
+  }
+
+  .advisor-select,
+  .mc-select,
+  .schema-select,
+  .course-select {
+    width: 100%;
   }
 }
