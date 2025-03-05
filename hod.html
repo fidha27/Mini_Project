@@ -4,20 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOD Dashboard</title>
-    <link rel="stylesheet" href="hod.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='hod.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="hod.js" defer></script>
 </head>
 <body>
     <header>
-        <img src="logo2.jpeg" alt="Logo" class="logo" height="65">
+        <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo" class="logo" height="65">
         <div class="header-text">
-            <h1>Welcome, <span id="hod-name">[HOD Name]</span></h1>
-            <h2 class="department-name">DEPARTMENT NAME</h2> <!-- Add this line -->
+            <h1>Welcome, <span id="hod-name">{{ hod_name }}</span></h1>
+            <h2 class="department-name">{{ department_name }}</h2>
         </div>
         <nav>
-            <div class="logout">
+            <div class="logout" onclick="logout()">
                 <i class="fas fa-power-off"></i>
                 <p>Logout</p>
             </div>
@@ -25,17 +23,17 @@
     </header>
     <aside id="sidebar">
         <ul>
-            <li><a href="hod.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="batches.html"><i class="fas fa-book"></i> Batches</a></li>
-            <li><a href="setth.html"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
-            <li><a href="mapad.html"><i class="fas fa-chalkboard-teacher"></i> Map Advisor</a></li>
+            <li><a href="{{ url_for('hod') }}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{{ url_for('batches') }}"><i class="fas fa-book"></i> Batches</a></li>
+            <li><a href="{{ url_for('setth') }}"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
+            <li><a href="{{ url_for('mapad') }}"><i class="fas fa-user-cog"></i> Map Advisor</a></li>
         </ul>
     </aside>
 
     <main>
         <section class="hod-card">
             <div class="hod-info">
-                <h2>HOD [Name]</h2>
+                <h2>HOD {{ hod_name }}</h2>
             </div>
         </section>
 
@@ -46,37 +44,32 @@
                     <tr>
                         <th>Batch Name</th>
                         <th>Name of Advisors</th>
-                        <th>Semester</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for batch in batches %}
                     <tr>
-                        <td rowspan="2">CS 2022-2026</td>
-                        <td>Anu Bonia</td>
-                        <td rowspan="2">S6</td>
+                        <td>{{ batch.batch_id }}</td>
+                        <td>{{ batch.adname }}</td>
                     </tr>
-                    <tr>
-                        <td>Alfred Thomas</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2">CS 2023-2027</td>
-                        <td>Praveen Pillai</td>
-                        <td rowspan="2">S4</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2">CS 2021-2025</td>
-                        <td>Prof Nisha</td>
-                        <td rowspan="2">S8</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </section>
     </main>
+
+    <script>
+        function logout() {
+            fetch("{{ url_for('logout') }}", {
+                method: 'GET',
+            }).then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>
