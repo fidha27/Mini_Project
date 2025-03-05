@@ -35,7 +35,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 5px; /* Space between HOD name and department name */
+  gap: 5px;
 }
 
 header h1 {
@@ -44,11 +44,11 @@ header h1 {
 }
 
 .department-name {
-  font-size: 16px; /* Adjust font size as needed */
-  color: #fff; /* White color */
-  text-transform: uppercase; /* Uppercase text */
-  font-weight: 500; /* Medium font weight */
-  margin: 0; /* Remove default margin */
+  font-size: 16px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0;
 }
 
 header nav {
@@ -95,7 +95,7 @@ header nav a:hover {
   left: 0;
   padding-top: 80px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  margin-top: 60px; /* Adjusted to account for the fixed header */
+  margin-top: 60px;
 }
 
 #sidebar ul {
@@ -126,9 +126,10 @@ header nav a:hover {
 main {
   margin-left: 250px;
   padding: 20px;
-  margin-top: 80px; /* Adjusted to account for the fixed header */
+  margin-top: 80px;
 }
 
+/* Card Styles */
 .hod-card {
   background-color: #fff;
   padding: 20px;
@@ -145,18 +146,7 @@ main {
   color: #1e588c;
 }
 
-/* Advisor Details Table Styles */
-.advisor-details {
-  margin-top: 20px;
-  overflow-x: auto;
-}
-
-.advisor-details h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #1e588c;
-}
-
+/* Table Styles */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -169,17 +159,13 @@ table th,
 table td {
   padding: 12px 15px;
   text-align: left;
-  white-space: nowrap;
+  border-bottom: 1px solid #ddd;
 }
 
 table th {
   background-color: #1e588c;
   color: #fff;
   font-weight: 600;
-}
-
-table tr {
-  border-bottom: 1px solid #ddd;
 }
 
 table tr:nth-child(even) {
@@ -190,8 +176,127 @@ table tr:hover {
   background-color: #f1f1f1;
 }
 
-table tr:last-child {
-  border-bottom: none;
+/* Section Styles */
+.section-heading {
+  background-color: #1e588c;
+  color: #fff;
+  font-size: 20px;
+  margin: -20px -20px 15px -20px;
+  padding: 15px 20px;
+  border-radius: 10px 10px 0 0;
+  text-transform: uppercase;
+}
+
+.attainment-section,
+.threshold-section,
+.correlation-matrix {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* Dropdown and Button Styles */
+.dropdown-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.dropdown-container select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background-color: #f4f4f9;
+  color: #333;
+  flex: 1;
+  transition: border-color 0.3s;
+}
+
+.dropdown-container select:focus {
+  border-color: #1e588c;
+}
+
+.next-button,
+.threshold-button,
+.save-button,
+.edit-button {
+  background-color: #1e588c;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.next-button:hover,
+.threshold-button:hover,
+.save-button:hover,
+.edit-button:hover {
+  background-color: #154267;
+}
+
+/* Threshold Display Styles */
+.threshold-display {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  text-align: center;
+}
+
+.threshold-box {
+  background-color: #f4f4f9;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 10px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Popup Styles */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup-content p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.popup-content button {
+  background-color: #1e588c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup-content button:hover {
+  background-color: #154267;
 }
 
 /* Responsive Design */
@@ -210,7 +315,21 @@ table tr:last-child {
       padding: 10px;
   }
 
-  .advisor-details {
-      overflow-x: auto;
+  .dropdown-container,
+  .threshold-container {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .next-button,
+  .threshold-button,
+  .save-button,
+  .edit-button {
+      width: 100%;
+  }
+
+  .dropdown-container select,
+  .threshold-dropdown {
+      width: 100%;
   }
 }
