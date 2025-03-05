@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Threshold Values</title>
-    <link rel="stylesheet" href="setth.css"> <!-- Using the same CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='hod.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <img src="logo2.jpeg" alt="Logo" class="logo" height="65">
+        <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo" class="logo" height="65">
         <div class="header-text">
-            <h1>Welcome, <span id="hod-name">[HOD Name]</span></h1>
-            <h2 class="department-name">DEPARTMENT OF COMPUTER SCIENCE</h2>
+            <h1>Welcome, <span id="hod-name">{{ hod_name }}</span></h1>
+            <h2 class="department-name">{{ department_name }}</h2>
         </div>
         <nav>
-            <div class="logout">
+            <div class="logout" onclick="logout()">
                 <i class="fas fa-power-off"></i>
                 <p>Logout</p>
             </div>
@@ -24,27 +24,51 @@
 
     <aside id="sidebar">
         <ul>
-            <li><a href="hod.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="batches.html"><i class="fas fa-book"></i> Batches</a></li>
-            <li><a href="setth.html"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
-            <li><a href="mapad.html"><i class="fas fa-chalkboard-teacher"></i> Map Advisor</a></li>
+            <li><a href="{{ url_for('hod') }}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{{ url_for('batches') }}"><i class="fas fa-book"></i> Batches</a></li>
+            <li><a href="{{ url_for('setth') }}"><i class="fas fa-chalkboard-teacher"></i> Set Threshold</a></li>
+            <li><a href="{{ url_for('mapad') }}"><i class="fas fa-chalkboard-teacher"></i> Map Advisor</a></li>
         </ul>
     </aside>
 
     <main>
+        <!-- Current Threshold Values -->
         <section class="threshold-display">
             <h2 class="section-heading">CURRENT THRESHOLD VALUES</h2>
             <div class="threshold-box">
-                <p><strong>Internal Evaluation Threshold:</strong> <span id="internal-threshold">70%</span></p>
-                <p><strong>External Evaluation Threshold:</strong> <span id="external-threshold">50%</span></p>
+                <p><strong>Direct Threshold:</strong> <span id="direct-threshold">{{ direct_threshold }}%</span></p>
+                <p><strong>Indirect Threshold:</strong> <span id="indirect-threshold">{{ indirect_threshold }}%</span></p>
             </div>
-            <button class="edit-button" onclick="editThreshold()">Edit</button>
+            <button class="edit-button" onclick="redirectToSetThreshold()">Edit</button>
+        </section>
+
+        <!-- CO Attainment Benchmark -->
+        <section class="threshold-display">
+            <h2 class="section-heading">CO ATTAINMENT BENCHMARK</h2>
+            <div class="co-attainment-box">
+                <p><strong>Level 3:</strong> <span id="level3">{{ co_attainment.level3 }}%</span></p>
+                <p><strong>Level 2:</strong> <span id="level2">{{ co_attainment.level2 }}%</span></p>
+                <p><strong>Level 1:</strong> <span id="level1">{{ co_attainment.level1 }}%</span></p>
+            </div>
+            <button class="edit-button" onclick="redirectToSetThreshold()">Edit</button>
         </section>
     </main>
 
-        <script>
-        function editThreshold() {
-            window.location.href = "setth2.html"; // Redirect to threshold editing page
+    <script>
+        function redirectToSetThreshold() {
+            window.location.href = "{{ url_for('setth2') }}";
+        }
+
+        function logout() {
+            fetch("{{ url_for('logout') }}", {
+                method: 'GET',
+            }).then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
         }
     </script>
 </body>
