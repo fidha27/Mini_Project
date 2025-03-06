@@ -35,7 +35,7 @@
         <!-- Map Advisor Section -->
         <section class="map-section">
             <h2 class="section-heading">MAP ADVISOR</h2>
-            <button id="add-batch-btn">Add Batch</button>
+            <button id="add-batch-btn" class="add-btn">Add Batch</button>
             <table id="advisor-table">
                 <thead>
                     <tr>
@@ -46,20 +46,20 @@
                 </thead>
                 <tbody>
                     {% for batch in batches %}
-                    <tr>
+                    <tr data-batch-id="{{ batch.batch_id }}">
                         <td>{{ batch.batch_id }}</td>
                         <td>
                             <span class="advisor-name">{{ batch.adname }}</span>
                             <select class="advisor-select hidden">
                                 {% for faculty in faculties %}
-                                <option value="{{ faculty.name }}">{{ faculty.name }}</option>
+                                <option value="{{ faculty.name }}" {% if faculty.name == batch.adname %}selected{% endif %}>{{ faculty.name }}</option>
                                 {% endfor %}
                             </select>
                         </td>
                         <td>
-                            <button class="edit-btn" data-batch-id="{{ batch.batch_id }}">Edit</button>
-                            <button class="save-btn hidden" data-batch-id="{{ batch.batch_id }}">Save</button>
-                            <button class="delete-btn" data-batch-id="{{ batch.batch_id }}">Delete</button>
+                            <button class="edit-btn">Edit</button>
+                            <button class="save-btn hidden">Save</button>
+                            <button class="delete-btn">Delete</button>
                         </td>
                     </tr>
                     {% endfor %}
@@ -70,7 +70,7 @@
         <!-- Map Module Coordinator Section -->
         <section class="map-section">
             <h2 class="section-heading">MAP MODULE COORDINATOR</h2>
-            <button id="add-module-btn">Add Module</button>
+            <button id="add-module-btn" class="add-btn">Add Module</button>
             <table id="module-table">
                 <thead>
                     <tr>
@@ -83,34 +83,34 @@
                 </thead>
                 <tbody>
                     {% for module in modules %}
-                    <tr>
+                    <tr data-module-id="{{ module.module_name }}">
                         <td>{{ module.module_name }}</td>
                         <td>
                             <span class="mc-name">{{ module.mcname }}</span>
                             <select class="mc-select hidden">
                                 {% for faculty in faculties %}
-                                <option value="{{ faculty.name }}">{{ faculty.name }}</option>
+                                <option value="{{ faculty.name }}" {% if faculty.name == module.mcname %}selected{% endif %}>{{ faculty.name }}</option>
                                 {% endfor %}
                             </select>
                         </td>
                         <td>
                             <select class="schema-select">
                                 {% for schema in schemas %}
-                                <option value="{{ schema.schema_name }}">{{ schema.schema_name }}</option>
+                                <option value="{{ schema.schema_name }}" {% if schema.schema_name == module.schema_name %}selected{% endif %}>{{ schema.schema_name }}</option>
                                 {% endfor %}
                             </select>
                         </td>
                         <td>
                             <select class="course-select" multiple>
                                 {% for course in courses %}
-                                <option value="{{ course.code }}">{{ course.title }}</option>
+                                <option value="{{ course.code }}" {% if course.code in module.courses %}selected{% endif %}>{{ course.title }}</option>
                                 {% endfor %}
                             </select>
                         </td>
                         <td>
-                            <button class="edit-mc-btn" data-module-id="{{ module.module_name }}">Edit</button>
-                            <button class="save-mc-btn hidden" data-module-id="{{ module.module_name }}">Save</button>
-                            <button class="delete-mc-btn" data-module-id="{{ module.module_name }}">Delete</button>
+                            <button class="edit-mc-btn">Edit</button>
+                            <button class="save-mc-btn hidden">Save</button>
+                            <button class="delete-mc-btn">Delete</button>
                         </td>
                     </tr>
                     {% endfor %}
