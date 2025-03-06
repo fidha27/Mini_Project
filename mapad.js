@@ -1,13 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Use the data passed from Flask
-    const faculties = window.faculties || [];
-    const schemas = window.schemas || [];
-    const courses = window.courses || [];
-
-    console.log('Faculties:', faculties); // Debugging
-    console.log('Schemas:', schemas);     // Debugging
-    console.log('Courses:', courses);    // Debugging
-
     // Map Advisor Logic
     const addBatchBtn = document.getElementById('add-batch-btn');
     const advisorTable = document.getElementById('advisor-table');
@@ -19,7 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
             <td><input type="text" class="new-batch-id" placeholder="Enter Batch ID"></td>
             <td>
                 <select class="advisor-select">
-                    ${faculties.map(faculty => `<option value="${faculty.name}">${faculty.name}</option>`).join('')}
+                    {% for faculty in faculties %}
+                    <option value="{{ faculty.name }}">{{ faculty.name }}</option>
+                    {% endfor %}
                 </select>
             </td>
             <td>
@@ -27,9 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 <button class="delete-btn">Delete</button>
             </td>
         `;
-        advisorTable.appendChild(newRow);
+        advisorTable.querySelector('tbody').appendChild(newRow);
 
-        // Reattach event listeners for the new row
+        // Attach event listeners to the new row
         const saveBtn = newRow.querySelector('.save-btn');
         const deleteBtn = newRow.querySelector('.delete-btn');
 
@@ -62,17 +55,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>
                         <span class="advisor-name">${newAdvisor}</span>
                         <select class="advisor-select hidden">
-                            ${faculties.map(faculty => `<option value="${faculty.name}">${faculty.name}</option>`).join('')}
+                            {% for faculty in faculties %}
+                            <option value="{{ faculty.name }}">{{ faculty.name }}</option>
+                            {% endfor %}
                         </select>
                     </td>
                     <td>
-                        <button class="edit-btn" data-batch-id="${batchId}">Edit</button>
-                        <button class="save-btn hidden" data-batch-id="${batchId}">Save</button>
-                        <button class="delete-btn" data-batch-id="${batchId}">Delete</button>
+                        <button class="edit-btn">Edit</button>
+                        <button class="save-btn hidden">Save</button>
+                        <button class="delete-btn">Delete</button>
                     </td>
                 `;
 
-                // Reattach event listeners for the new buttons
+                // Reattach event listeners
                 const editBtn = row.querySelector('.edit-btn');
                 const saveBtn = row.querySelector('.save-btn');
                 const deleteBtn = row.querySelector('.delete-btn');
@@ -101,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Delete Batch Handler
     function deleteBatchHandler() {
         const row = this.closest('tr');
-        const batchId = this.getAttribute('data-batch-id');
+        const batchId = row.getAttribute('data-batch-id');
 
         fetch('/delete_batch', {
             method: 'POST',
@@ -132,17 +127,23 @@ document.addEventListener('DOMContentLoaded', function () {
             <td><input type="text" class="new-module-name" placeholder="Enter Module Name"></td>
             <td>
                 <select class="mc-select">
-                    ${faculties.map(faculty => `<option value="${faculty.name}">${faculty.name}</option>`).join('')}
+                    {% for faculty in faculties %}
+                    <option value="{{ faculty.name }}">{{ faculty.name }}</option>
+                    {% endfor %}
                 </select>
             </td>
             <td>
                 <select class="schema-select">
-                    ${schemas.map(schema => `<option value="${schema.schema_name}">${schema.schema_name}</option>`).join('')}
+                    {% for schema in schemas %}
+                    <option value="{{ schema.schema_name }}">{{ schema.schema_name }}</option>
+                    {% endfor %}
                 </select>
             </td>
             <td>
                 <select class="course-select" multiple>
-                    ${courses.map(course => `<option value="${course.details.code}">${course.details.title}</option>`).join('')}
+                    {% for course in courses %}
+                    <option value="{{ course.code }}">{{ course.title }}</option>
+                    {% endfor %}
                 </select>
             </td>
             <td>
@@ -150,9 +151,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 <button class="delete-mc-btn">Delete</button>
             </td>
         `;
-        moduleTable.appendChild(newRow);
+        moduleTable.querySelector('tbody').appendChild(newRow);
 
-        // Reattach event listeners for the new row
+        // Attach event listeners to the new row
         const saveMcBtn = newRow.querySelector('.save-mc-btn');
         const deleteMcBtn = newRow.querySelector('.delete-mc-btn');
 
@@ -191,27 +192,33 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>
                         <span class="mc-name">${newMcName}</span>
                         <select class="mc-select hidden">
-                            ${faculties.map(faculty => `<option value="${faculty.name}">${faculty.name}</option>`).join('')}
+                            {% for faculty in faculties %}
+                            <option value="{{ faculty.name }}">{{ faculty.name }}</option>
+                            {% endfor %}
                         </select>
                     </td>
                     <td>
                         <select class="schema-select">
-                            ${schemas.map(schema => `<option value="${schema.schema_name}">${schema.schema_name}</option>`).join('')}
+                            {% for schema in schemas %}
+                            <option value="{{ schema.schema_name }}">{{ schema.schema_name }}</option>
+                            {% endfor %}
                         </select>
                     </td>
                     <td>
                         <select class="course-select" multiple>
-                            ${courses.map(course => `<option value="${course.details.code}">${course.details.title}</option>`).join('')}
+                            {% for course in courses %}
+                            <option value="{{ course.code }}">{{ course.title }}</option>
+                            {% endfor %}
                         </select>
                     </td>
                     <td>
-                        <button class="edit-mc-btn" data-module-id="${moduleName}">Edit</button>
-                        <button class="save-mc-btn hidden" data-module-id="${moduleName}">Save</button>
-                        <button class="delete-mc-btn" data-module-id="${moduleName}">Delete</button>
+                        <button class="edit-mc-btn">Edit</button>
+                        <button class="save-mc-btn hidden">Save</button>
+                        <button class="delete-mc-btn">Delete</button>
                     </td>
                 `;
 
-                // Reattach event listeners for the new buttons
+                // Reattach event listeners
                 const editMcBtn = row.querySelector('.edit-mc-btn');
                 const saveMcBtn = row.querySelector('.save-mc-btn');
                 const deleteMcBtn = row.querySelector('.delete-mc-btn');
@@ -240,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Delete Module Handler
     function deleteModuleHandler() {
         const row = this.closest('tr');
-        const moduleName = this.getAttribute('data-module-id');
+        const moduleName = row.getAttribute('data-module-id');
 
         fetch('/delete_module', {
             method: 'POST',
