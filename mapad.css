@@ -216,6 +216,20 @@ table tr:hover {
 .add-btn:hover {
   background-color: #138496; /* Darker Teal */
 }
+/* Add this to your existing CSS */
+.add-btn {
+  background-color: #1e588c; /* Blue */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.add-btn:hover {
+  background-color: #154267; /* Darker Blue */
+}
 
 /* Module Coordinator Button Styles */
 .edit-mc-btn {
