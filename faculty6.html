@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO Attainment Results</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+        h2 {
+            color: #1e588c;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .table-bordered {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .table-dark {
+            background-color: #1e588c;
+            color: #ffffff;
+        }
+        .table-dark th {
+            border-color: #1e588c;
+        }
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #dee2e6;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        .table tbody tr {
+            transition: background-color 0.3s ease;
+        }
+        .table tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+        .table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">CO Attainment Results</h2>
+        <table class="table table-bordered text-center table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>CO</th>
+                    <th>CO Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for co, attainment in final_co_attainment.items() %}
+                <tr>
+                    <td>{{ co }}</td>
+                    <td>{{ attainment|round(2) }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

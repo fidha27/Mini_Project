@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO Question Entry</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='survey.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Enter Question and Scale Data for {{ course_name }} (Batch: {{ batch }})</h2>
+
+    <form id="coForm">
+        <input type="hidden" id="course_name" value="{{ course_name }}">
+        <input type="hidden" id="batch" value="{{ batch }}">
+        
+        <div id="coContainer">
+            {% for co in co_list %}
+                <h3>CO{{ co.co_no }}</h3>
+                
+                <!-- Question Input -->
+                <label>Enter Question:</label>
+                <input type="text" name="questions[{{ co.co_no }}]" required>
+
+                <!-- Scale Selection -->
+                <label>Select Number of Scales:</label>
+                <select name="num_scales[{{ co.co_no }}]" onchange="generateScaleInputs('{{ co.co_no }}', this.value)">
+                    <option value="3" selected>1-3</option>
+                    <option value="4">1-4</option>
+                    <option value="5">1-5</option>
+                    <option value="6">1-6</option>
+                </select>
+
+                <!-- Dynamic Scale Input Fields -->
+                <div id="scale_inputs_{{ co.co_no }}">
+                    <label>Scale 1:</label>
+                    <input type="number" name="scale_counts[{{ co.co_no }}][1]" min="0" required>
+                    
+                    <label>Scale 2:</label>
+                    <input type="number" name="scale_counts[{{ co.co_no }}][2]" min="0" required>
+                    
+                    <label>Scale 3:</label>
+                    <input type="number" name="scale_counts[{{ co.co_no }}][3]" min="0" required>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Submit Data</button>
+    </form>
+
+    <script>
+        function generateScaleInputs(co_no, num_scales) {
+            let scaleDiv = $("#scale_inputs_" + co_no);
+            scaleDiv.empty();
+        
+            for (let i = 1; i <= num_scales; i++) {
+                scaleDiv.append(`
+                    <label>Scale ${i}:</label>
+                    <input type="number" name="scale_counts[${co_no}][${i}]" min="0" required>
+                `);
+            }
+        }
+        
+
+        $("#coForm").submit(function(event) {
+            event.preventDefault();
+            console.log("Form Submitted!"); // Debugging
+        
+            let course_name = $("#course_name").val();
+            let batch = $("#batch").val();
+            let formData = { course_name, batch, questions: {}, scales: {} };
+        
+            $("#coContainer h3").each(function() {
+                let co = $(this).text().replace("CO", "").trim();
+                let questionInput = $(`input[name='questions[${co}]']`);
+        
+                if (questionInput.length > 0) {
+                    formData.questions[co] = questionInput.val();
+                }
+        
+                let scaleCounts = {};
+                $(`input[name^='scale_counts[${co}]']`).each(function() {
+                    let match = $(this).attr("name").match(/\[(\d+)\]$/);
+                    if (match) {
+                        let scale = match[1];
+                        scaleCounts[scale] = parseInt($(this).val()) || 0;
+                    }
+                });
+        
+                if (Object.keys(scaleCounts).length > 0) {
+                    formData.scales[co] = scaleCounts;
+                }
+            });
+        
+            console.log("Sending Data:", formData); // Debugging
+        
+            fetch('/submit_scales', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => console.log("Response:", data))
+            .catch(error => console.log("Error:", error));
+        });
+          
+    </script>
+</body>
+</html>

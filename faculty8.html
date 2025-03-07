@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External Marks Entry</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='faculty8.css') }}">
+
+    <script>
+        function calculateAndSubmit() {
+            let totalStudents = 0;
+            let aboveThresholdCount = 0;
+            let thresholdGrade = "{{ grades }}";  // Threshold grade stored in DB
+        
+            let weightages = { "S": 100, "A+": 90, "A": 80, "B+": 70, "B": 60, "C+": 50, "C": 40, "D": 30, "P": 20, "F": 0 };
+            let grades = ["S", "A+", "A", "B+", "B", "C+", "C", "D", "P", "F"];
+            
+            let thresholdIndex = grades.indexOf(thresholdGrade);
+            if (thresholdIndex === -1) {
+                alert("Invalid threshold grade.");
+                return;
+            }
+        
+            grades.forEach((grade, index) => {
+                let count = parseInt(document.getElementById(grade).value) || 0;
+                totalStudents += count;
+
+            
+                
+                // Include students from threshold grade and above
+                if (index <= thresholdIndex) {
+                    aboveThresholdCount += count;
+                }
+            });
+            console.log(totalStudents);
+            console.log(aboveThresholdCount)
+        
+            if (totalStudents === 0) {
+                alert("No students entered!");
+                return;
+            }
+        
+            let achievementPercentage = (aboveThresholdCount / totalStudents) * 100;
+            document.getElementById("co_achievement").innerText = achievementPercentage.toFixed(2) + "%";
+        
+            fetch('/submit-external-marks', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    faculty_pen_no: "{{ faculty_pen_no }}",
+                    course_name: "{{ course_name }}",
+                    batch: "{{ batch }}",
+                    co_nos: {{ co_no | tojson }},  // Send all COs
+                    achievement_percentage: achievementPercentage
+                })
+            }).then(response => response.json())
+              .then(data => alert(data.message))
+              .catch(error => console.error("Error saving data:", error));
+        }
+        
+    </script>
+</head>
+<body>
+    <h2>External Marks Entry</h2>
+    
+    <form>
+        <label>Course Name: {{ course_name }}</label><br>
+        <label>Batch: {{ batch }}</label><br>
+        <label>CO No: {{ co_no }}</label><br><br>
+
+        <h3>Enter Number of Students for Each Grade</h3>
+        
+        {% for grade in ["S", "A+", "A", "B+", "B", "C+", "C", "D", "P", "F"] %}
+            <label for="{{ grade }}">{{ grade }}: </label>
+            <input type="number" id="{{ grade }}" name="{{ grade }}" min="0" value="0"><br>
+        {% endfor %}
+
+        <br>
+        <label>Threshold Percentage: </label>
+        <input type="number" id="threshold" value="{{ threshold }}" readonly> % <br><br>
+
+        <button type="button" onclick="calculateAndSubmit()">Calculate & Save</button>
+    </form>
+
+
+</body>
+</html>

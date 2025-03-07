@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='faculty5.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo1.png') }}" alt="Logo" class="logo">
+        <h1>MARK UPLOAD</h1>
+        <a href="{{ url_for('index') }}" class="home-btn">HOME</a>
+    </header>
+
+    <section class="container">
+        <div class="exam-type">
+            <label>EXAM TYPE</label>
+            <select id="examType" >
+                <option value="" disabled selected>Select a tool</option>
+                {% for tool in tool_config %}
+                    <option value="{{ tool.tool_name }} {{ tool.tool_number }}">
+                        {{ tool.tool_name }} {{ tool.tool_number }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="inputs">
+            <label>NO OF PARTS:</label> 
+            <input type="number" id="numParts" placeholder="Enter number of parts" oninput="generateParts()">
+        </div>
+
+        <div id="partsContainer"></div>
+
+        <div class="button-container">
+            <button id="confirmButton" onclick="confirmEntries()">CONFIRM</button>
+            <input type="file" id="fileUpload">
+            <button id="uploadButton" onclick="uploadFile()">Upload Marks</button>
+            <button onclick="enterMark()">ENTER MARK</button>
+        </div>
+
+        <h3 id="studentTableTitle" style="display: none;">Enter Student Marks</h3>
+        <table id="studentMarksTable" style="display: none;">
+            <thead>
+                <tr id="studentHeader">
+                    <th>Student Name</th>
+                </tr>
+            </thead>
+            <tbody id="studentMarksBody">
+                {% if students %}
+                    {% for student in students %}
+                        <tr>
+                            <td>{{ student.name }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="2">No students found</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+        <div class="button-container">
+            <button onclick="generateCSV()">Generate CSV</button>
+            <a id="csvDownloadLink" style="display: none;" download>Download CSV</a>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='faculty5.js') }}" defer></script>
+</body>
+</html>

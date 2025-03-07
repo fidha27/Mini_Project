@@ -1,0 +1,124 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+    color: #333;
+    padding: 20px;
+}
+
+/* Form Container */
+h2 {
+    color: #1e588c;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label Styling */
+label {
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+/* Input & Select Styling */
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+button {
+    background: linear-gradient(135deg, #1e588c, #154267);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #154267, #1e588c);
+    transform: scale(1.05);
+}
+
+/* Add Question Button */
+button[type="button"] {
+    background: linear-gradient(135deg, #ffdd57, #e6c64d);
+    color: #1e588c;
+    margin-bottom: 15px;
+}
+
+button[type="button"]:hover {
+    background: linear-gradient(135deg, #e6c64d, #ffdd57);
+}
+
+/* Questions Container */
+#coContainer, #scaleContainer {
+    margin-bottom: 20px;
+}
+
+#coContainer div, #scaleContainer div {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Scale Data Inputs */
+#scaleContainer input[type="text"] {
+    width: calc(50% - 10px);
+    margin-right: 10px;
+}
+
+#scaleContainer input[type="text"]:last-child {
+    margin-right: 0;
+}
+
+/* Submit Buttons */
+form button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #scaleContainer input[type="text"] {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    form button[type="submit"] {
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    form h3 {
+        font-size: 1.3rem;
+    }
+}
